@@ -13,89 +13,79 @@
             margin: 0;
         }
 
-        h1 {
-            color: #333;
-        }
-
-        form {
+        .calculator {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
 
-        input, select, button {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
+        .display {
+            width: calc(100% - 20px);
+            margin: 10px auto;
             padding: 10px;
-            font-size: 16px;
+            font-size: 24px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            text-align: right;
         }
 
-        button {
-            background-color: #28a745;
-            color: white;
-            border: none;
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .buttons button {
+            padding: 20px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f4f4f4;
             cursor: pointer;
         }
 
-        button:hover {
+        .buttons button:hover {
+            background-color: #ddd;
+        }
+
+        .buttons .equals {
+            grid-column: span 4;
+            background-color: #28a745;
+            color: white;
+        }
+
+        .buttons .equals:hover {
             background-color: #218838;
         }
-
-        h2 {
-            color: #555;
-        }
     </style>
-</head>
-<body>
-    <h1>Kalkulator</h1>
-    <form method="post">
-        <input type="number" name="num1" placeholder="Pierwsza liczba" required>
-        <select name="operation">
-            <option value="add">Dodaj</option>
-            <option value="subtract">Odejmij</option>
-            <option value="multiply">Pomnóż</option>
-            <option value="divide">Podziel</option>
-        </select>
-        <input type="number" name="num2" placeholder="Druga liczba" required>
-        <button type="submit">Oblicz</button>
-    </form>
 
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $num1 = $_POST['num1'];
-        $num2 = $_POST['num2'];
-        $operation = $_POST['operation'];
-        $result = 0;
+        include $_SERVER["DOCUMENT_ROOT"].'/php/DBconnect.php';
+        // const DB = new DBconnect();
 
-        switch ($operation) {
-            case "add":
-                $result = $num1 + $num2;
-                break;
-            case "subtract":
-                $result = $num1 - $num2;
-                break;
-            case "multiply":
-                $result = $num1 * $num2;
-                break;
-            case "divide":
-                if ($num2 != 0) {
-                    $result = $num1 / $num2;
-                } else {
-                    echo "Nie można dzielić przez zero!";
-                    exit;
-                }
-                break;
-            default:
-                echo "Nieznana operacja";
-                exit;
-        }
-
-        echo "<h2>Wynik: $result</h2>";
-    }
+        // ZOBACZYC NGINX
+        // HTTP_SEC_CH_UA_MOBILE 1/0
+        // HTTP_SEC_CH_UA_PLATFORM "Windows", "Linux", "Android", "iOS", "MacOS"
     ?>
+</head>
+<body style="height: 100%;">
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($_SERVER as $key => $value): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($key); ?></td>
+                    <td><?php echo htmlspecialchars($value); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </body>
 </html>
