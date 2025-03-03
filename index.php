@@ -60,17 +60,12 @@
             background-color: #218838;
         }
     </style>
-
-    <?php
-        include $_SERVER["DOCUMENT_ROOT"].'/php/DBconnect.php';
-        // const DB = new DBconnect();
-
-        // ZOBACZYC NGINX
-        // HTTP_SEC_CH_UA_MOBILE 1/0
-        // HTTP_SEC_CH_UA_PLATFORM "Windows", "Linux", "Android", "iOS", "MacOS"
-    ?>
 </head>
 <body style="height: 100%;">
+    <script>
+        console.log(<?= preg_match('/Mobile|Android|iPhone|iPad/i', $userAgent ?? $_SERVER['HTTP_USER_AGENT']) ? 'true' : 'false' ?> ? 'Użytkownik korzysta z urządzenia mobilnego.' : 'Użytkownik korzysta z komputera.');
+    </script>
+
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
@@ -79,13 +74,21 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($_SERVER as $key => $value): ?>
+            <?php foreach ($_ENV as $key => $value): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($key); ?></td>
-                    <td><?php echo htmlspecialchars($value); ?></td>
+                    <td>
+                        <?php 
+                            if (is_array($value)) {
+                                echo '<pre>' . htmlspecialchars(print_r($value, true)) . '</pre>';
+                            } else {
+                                echo htmlspecialchars($value);
+                            }
+                        ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </body>
-</html>
+</html>`
