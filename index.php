@@ -1,94 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kalkulator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+    <title>TruckStopInfo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .calculator {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
+    <!-- Logo -->
+    <link rel="icon" href="/src/img/logo.png" type="image/x-icon">
 
-        .display {
-            width: calc(100% - 20px);
-            margin: 10px auto;
-            padding: 10px;
-            font-size: 24px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: right;
-        }
+    <!-- CSS -->
+    <link rel="stylesheet" href="/src/css/main.css">
 
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .buttons button {
-            padding: 20px;
-            font-size: 18px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f4f4f4;
-            cursor: pointer;
-        }
-
-        .buttons button:hover {
-            background-color: #ddd;
-        }
-
-        .buttons .equals {
-            grid-column: span 4;
-            background-color: #28a745;
-            color: white;
-        }
-
-        .buttons .equals:hover {
-            background-color: #218838;
-        }
-    </style>
+    <!-- JavaScript -->
+    <script src="/src/js/main.js" type="module"></script>
 </head>
 <body style="height: 100%;">
     <script>
-        console.log(<?= preg_match('/Mobile|Android|iPhone|iPad/i', $userAgent ?? $_SERVER['HTTP_USER_AGENT']) ? 'true' : 'false' ?> ? 'Użytkownik korzysta z urządzenia mobilnego.' : 'Użytkownik korzysta z komputera.');
+        console.log(<?= preg_match('/mobile|android|iphone|ipad|phone/i', $userAgent ?? $_SERVER['HTTP_USER_AGENT']) ? 'true' : 'false' ?> ? 'Użytkownik korzysta z urządzenia mobilnego.' : 'Użytkownik korzysta z komputera.');
     </script>
+    TruckStopInfo
+    <!--
+        Jak wygląda User-Agent w różnych przeglądarkach?
 
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Key</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($_ENV as $key => $value): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($key); ?></td>
-                    <td>
-                        <?php 
-                            if (is_array($value)) {
-                                echo '<pre>' . htmlspecialchars(print_r($value, true)) . '</pre>';
-                            } else {
-                                echo htmlspecialchars($value);
-                            }
-                        ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        Przykładowe wartości $_SERVER['HTTP_USER_AGENT'] dla różnych przeglądarek:
+        Chrome (Windows 10)
+
+        Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+
+        Chrome (Android)
+
+        Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36
+
+        Firefox (Windows 10)
+
+        Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0
+
+        Firefox (Android)
+
+        Mozilla/5.0 (Android 13; Mobile; rv:123.0) Gecko/123.0 Firefox/123.0
+
+        Edge (Windows 10)
+
+        Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0
+
+        Safari (Mac)
+
+        Mozilla/5.0 (Macintosh; Intel Mac OS X 13_3) AppleWebKit/537.36 (KHTML, like Gecko) Version/16.3 Safari/537.36
+
+        Safari (iPhone)
+
+        Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Version/16.3 Mobile/15E148 Safari/537.36 
+    -->
 </body>
-</html>`
+</html>
