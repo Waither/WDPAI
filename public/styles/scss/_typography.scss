@@ -1,3 +1,119 @@
 body {
-    font-family: $font-main;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
+    color: $color-body;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 10px;
+}
+
+// Paragraphs
+p {
+    margin: 0 0 15px;
+}
+
+// Links
+a {
+    color: $color-link;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Font size
+@for $i from 1 through 6 {
+    .fs-#{$i} {
+        font-size: calc(1.375rem + #{1.5 - ($i * 0.2)}vw) !important;
+    }
+}
+
+.fst-italic {
+    font-style: italic !important;
+}
+
+.fst-normal {
+    font-style: normal !important;
+}
+
+// Font weight
+@each $weight, $value in (lighter: lighter, light: 300, normal: 400, medium: 500, semibold: 600, bold: 700, bolder: bolder) {
+    .fw-#{$weight} {
+        font-weight: $value !important;
+    }
+}
+
+// Text align
+@each $align in (start, end, center) {
+    .text-#{$align} {
+        text-align: $align !important;
+    }
+}
+
+// Text decoration
+@each $decoration in (none, underline, line-through) {
+    .text-decoration-#{$decoration} {
+        text-decoration: $decoration !important;
+    }
+}
+
+// Text transform
+@each $transform in (lowercase, uppercase, capitalize) {
+    .text-#{$transform} {
+        text-transform: $transform !important;
+    }
+}
+
+// Text wrap
+.text-wrap {
+    white-space: normal !important;
+}
+
+.text-nowrap {
+    white-space: nowrap !important;
+}
+
+.text-break {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+// Text color
+@each $color in (primary, secondary, success, danger, warning, info, light, dark, black, white, body, muted, black-50, white-50, body-secondary, body-tertiary, body-emphasis, reset) {
+    .text-#{$color} {
+        --text-opacity: 1;
+        color: rgba(var(--color-#{$color}-rgb), var(--text-opacity)) !important;
+    }
+}
+
+// Text opacity
+@each $opacity in (25, 50, 75, 100) {
+    .text-opacity-#{$opacity} {
+        opacity: #{0.01 * $opacity};
+    }
+}
+
+// Background color
+@each $color in (primary, secondary, success, danger, warning, info, light, dark, black, white, body, transparent) {
+    .bg-#{$color} {
+        --bg-opacity: 1;
+        background-color: if($color == transparent, transparent, rgba(var(--color-#{$color}-rgb), var(--bg-opacity))) !important;
+    }
+}
+
+// Background opacity
+@for $i from 1 through 10 {
+    .bg-opacity-#{$i * 10} {
+        --bg-opacity: #{0.1 * $i};
+    }
+}
+
+// Background gradient
+.bg-gradient {
+	background-image: var(--mdb-gradient) !important;
 }

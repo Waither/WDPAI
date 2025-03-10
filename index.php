@@ -5,9 +5,9 @@ $request = $_SERVER['REQUEST_URI'];
 $viewDir = '/public/views/';
 
 $routes = [
-    '/' => 'home.html',
-    '/places' => 'places.html',
-    '/map' => 'map.html',
+    '/' => 'home.php',
+    '/places' => 'places.php',
+    '/map' => 'map.php',
     '/'
 ];
 

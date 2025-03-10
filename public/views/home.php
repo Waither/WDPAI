@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <title>TruckStopInfo</title>
     <meta charset="utf-8">
@@ -15,8 +15,30 @@
     <!-- JavaScript -->
     <script src="/public/scripts/main.js" type="module"></script>
 </head>
-<body style="height: 100%;">
-    TruckStopInfo
+<body>
+    <?php require __DIR__.'/presets/menu.html'; ?>
+    
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-8">
+                <label class="form-label" for="formControl">Form control lg</label>
+                <input type="text" id="formControl" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-outline" data-mdb-input-init>
+        <input type="text" id="formControlLg2" class="form-control form-control-lg" />
+        <label class="form-label" for="formControlLg2">Form control lg</label>
+    </div>
+    
+    <select class="form-select" name="" id="">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    
+    
     <!--
         Przykładowe wartości $_SERVER['HTTP_USER_AGENT'] dla różnych przeglądarek:
         
