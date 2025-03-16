@@ -1,7 +1,59 @@
-.menu {
+.menuLeft {
     width: 100px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 30px 0;
-    box-shadow: 1px 0 10px 2px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+
+    #logo > img {
+        width: 100%;
+    }
+
+    #links {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 10px 5px;
+        gap: 15px;
+
+        .link:last-child {
+            margin-top: auto;
+        }
+    }
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+
+    .buttonMenu {
+        border-radius: 100px;
+        background-color: $color-white;
+        color: $color-black;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+
+        &[current-page="true"] {
+            background-color: $color-primary;
+        }
+    }
+
+    label {
+        font-weight: $font-weight-bold;
+        color: $color-black;
+        text-align: center;
+    }
+}
+
+#main {
+    height: 100vh;
+    padding: 2rem;
+    flex: 1;
+    
+    >div {
+        background-color: $color-body-bg;
+    }
 }

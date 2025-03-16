@@ -3,12 +3,6 @@
 <?php include 'presets/head.php'; ?>
 <body>
     <?php include 'presets/sidebar.php'; ?>
-
-    <div id="main">
-        <div class="h-100 rounded-5 shadow">
-
-        </div>
-    </div>
     <!--
         Przykładowe wartości $_SERVER['HTTP_USER_AGENT'] dla różnych przeglądarek:
         
