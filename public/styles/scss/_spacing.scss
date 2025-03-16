@@ -1,0 +1,38 @@
+// 
+$spacings: 0, 0.25rem, 0.5rem, 1rem, 1.5rem, 3rem;
+$negative-spacings: -0.25rem, -0.5rem, -1rem, -1.5rem, -3rem;
+$extra-mb-spacings: 3.5rem, 4rem, 5rem, 6rem, 8rem, 10rem, 12rem, 14rem, 16rem;
+
+@for $i from 0 through 5 {
+    // Margins
+    .m-#{$i} { margin: nth($spacings, $i + 1) !important; }
+    .mx-#{$i} { margin-right: nth($spacings, $i + 1) !important; margin-left: nth($spacings, $i + 1) !important; }
+    .my-#{$i} { margin-top: nth($spacings, $i + 1) !important; margin-bottom: nth($spacings, $i + 1) !important; }
+    .mt-#{$i} { margin-top: nth($spacings, $i + 1) !important; }
+    .me-#{$i} { margin-right: nth($spacings, $i + 1) !important; }
+    .mb-#{$i} { margin-bottom: nth($spacings, $i + 1) !important; }
+    .ms-#{$i} { margin-left: nth($spacings, $i + 1) !important; }
+
+    // Paddings
+    .p-#{$i} { padding: nth($spacings, $i + 1) !important; }
+    .px-#{$i} { padding-right: nth($spacings, $i + 1) !important; padding-left: nth($spacings, $i + 1) !important; }
+    .py-#{$i} { padding-top: nth($spacings, $i + 1) !important; padding-bottom: nth($spacings, $i + 1) !important; }
+    .pt-#{$i} { padding-top: nth($spacings, $i + 1) !important; }
+    .pe-#{$i} { padding-right: nth($spacings, $i + 1) !important; }
+    .pb-#{$i} { padding-bottom: nth($spacings, $i + 1) !important; }
+    .ps-#{$i} { padding-left: nth($spacings, $i + 1) !important; }
+}
+
+// Auto margins
+.m-auto { margin: auto !important; }
+.mx-auto { margin-right: auto !important; margin-left: auto !important; }
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
+.mt-auto { margin-top: auto !important; }
+.me-auto { margin-right: auto !important; }
+.mb-auto { margin-bottom: auto !important; }
+.ms-auto { margin-left: auto !important; }
+
+// More bottom margins
+@for $i from 6 through 14 {
+    .mb-#{$i} { margin-bottom: nth($extra-mb-spacings, $i - 5) !important; }
+}
