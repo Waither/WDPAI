@@ -1,4 +1,4 @@
-.menuLeft {
+#menuLeft {
     width: 100px;
     height: 100%;
     display: flex;
@@ -19,6 +19,25 @@
 
         .link:last-child {
             margin-top: auto;
+        }
+    }
+}
+
+#menuBottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+
+    #links {
+        display: flex;
+        justify-content: space-between;
+        flex: 1;
+        padding: 10px 5px;
+        gap: 15px;
+
+        .link {
+            flex: 1;
         }
     }
 }
@@ -56,4 +75,17 @@
     >div {
         background-color: $color-body-bg;
     }
+}
+
+#containerMap {
+    flex: 1;
+
+    >div:nth-child(2) {
+        flex: 1;
+    }
+}
+
+#map {
+    height: 100%;
+    width: 100%;
 }

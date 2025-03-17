@@ -11,9 +11,9 @@ $routes = [
     '/'
 ];
 
-$page = $routes[$request] ?? 'presets/404.html';
+$page = $routes[$request] ?? 'presets/errors/404.html';
 if (!file_exists(__DIR__."{$viewDir}{$page}")) {
-    $page = 'presets/501.html';
+    $page = 'presets/errors/501.html';
 }
 
 require __DIR__."{$viewDir}{$page}";

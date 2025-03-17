@@ -1,5 +1,13 @@
 <head>
-    <title>TruckStopInfo | <?= ucfirst(basename(__FILE__, '.php')) ?></title>
+    <?php
+    $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $segments = explode('/', $path);
+    $title = 'Home';
+    if (!empty($segments[0])) {
+        $title = ucfirst($segments[0]);
+    }
+    ?>
+    <title>TruckStopInfo | <?= $title ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

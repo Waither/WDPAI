@@ -1,16 +1,7 @@
 <?php
     $url = $_SERVER['REQUEST_URI'];
 ?>
-<nav id="<?= $mobile ? "menuBottom" : "menuLeft"; ?>" class="shadow">
-    <?php
-        if (!$mobile) {
-            ?>
-            <div id="logo">
-                <img src="/public/img/logo.png" alt="">
-            </div>
-            <?php
-        }
-    ?>
+<nav id="menuBottom" class="shadow">
     <div id="links">
         <?php
             require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/Link.php';

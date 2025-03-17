@@ -1647,14 +1647,6 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 	cursor: pointer;
 }
 
-.form-control:focus {
-	color: var(--surface-color);
-	background-color: var(--body-bg);
-	border-color: #3b71ca;
-	outline: 0;
-	box-shadow: var(--box-shadow-inset), 0 0 0 0.25rem rgba(59, 113, 202, 0.25);
-}
-
 .form-control::-webkit-date-and-time-value {
 	min-width: 85px;
 	height: 1.6em;
@@ -1814,8 +1806,8 @@ textarea.form-control-lg {
 .form-control:focus {
 	box-shadow: none;
 	transition: all 0.1s linear;
-	border-color: #3b71ca;
-	box-shadow: inset 0px 0px 0px 1px #3b71ca;
+	border-color: rgba(79, 79, 79, 0.75);
+	box-shadow: inset 0px 0px 0px 1px rgba(79, 79, 79, 0.75);
 }
 
 .form-control.form-control-sm {
@@ -2399,7 +2391,7 @@ textarea.form-control-lg {
 	box-shadow: inset 0px 0px 0px 1px #3b71ca;
 }
 
-.menuLeft {
+#menuLeft {
 	width: 100px;
 	height: 100%;
 	display: flex;
@@ -2407,18 +2399,35 @@ textarea.form-control-lg {
 	padding: 30px 0;
 	background-color: #fff;
 }
-.menuLeft #logo > img {
+#menuLeft #logo > img {
 	width: 100%;
 }
-.menuLeft #links {
+#menuLeft #links {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 	padding: 10px 5px;
 	gap: 15px;
 }
-.menuLeft #links .link:last-child {
+#menuLeft #links .link:last-child {
 	margin-top: auto;
+}
+
+#menuBottom {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+}
+#menuBottom #links {
+	display: flex;
+	justify-content: space-between;
+	flex: 1;
+	padding: 10px 5px;
+	gap: 15px;
+}
+#menuBottom #links .link {
+	flex: 1;
 }
 
 .link {
@@ -2450,6 +2459,18 @@ textarea.form-control-lg {
 }
 #main > div {
 	background-color: #fff;
+}
+
+#containerMap {
+	flex: 1;
+}
+#containerMap > div:nth-child(2) {
+	flex: 1;
+}
+
+#map {
+	height: 100%;
+	width: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
