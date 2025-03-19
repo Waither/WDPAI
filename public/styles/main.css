@@ -1647,6 +1647,14 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 	cursor: pointer;
 }
 
+.form-control:focus {
+	color: var(--surface-color);
+	background-color: var(--body-bg);
+	border-color: rgba(79, 79, 79, 0.75);
+	outline: 0;
+	box-shadow: var(--box-shadow-inset), 0 0 0 0.25rem rgba(59, 113, 202, 0.25);
+}
+
 .form-control::-webkit-date-and-time-value {
 	min-width: 85px;
 	height: 1.6em;
@@ -2452,10 +2460,23 @@ textarea.form-control-lg {
 	text-align: center;
 }
 
+#mobileTop {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+}
+#mobileTop img {
+	width: 80px;
+}
+
 #main {
 	height: 100vh;
 	padding: 2rem;
 	flex: 1;
+}
+body[data-mobile="1"] #main {
+	padding: 1rem 0.5rem;
 }
 #main > div {
 	background-color: #fff;

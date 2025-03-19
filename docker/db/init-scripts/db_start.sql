@@ -1,3 +1,5 @@
+CREATE SCHEMA "truckstop";
+
 CREATE TABLE "rel_place_attribute" (
   "ID_place" int4 NOT NULL,
   "ID_attribute" int4 NOT NULL,
@@ -26,7 +28,8 @@ START 1
   "city" varchar(100),
   "street" varchar(100),
   "zip_code" varchar(100),
-  "location" geography DEFAULT NULL,
+  "longitude" float DEFAULT NULL,
+  "latitude" float DEFAULT NULL,
   "image" bytea,
   "active" bool,
   CONSTRAINT "tb_place_pkey" PRIMARY KEY ("ID_place")

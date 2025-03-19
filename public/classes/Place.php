@@ -7,20 +7,18 @@ class Place {
     private string $company;
     private string $description;
     private string $address;
-    private float $latitude;
-    private float $longitude;
+    private array $location;
     private float $rating;
     private string $image;
 
-    public function __construct(int $id, string $name, string $type, string $company, string $description, string $address, float $latitude, float $longitude, float $rating, string $image) {
+    public function __construct(int $id, string $name, string $type, string $company, string $description, string $address, array $location, float $rating, string $image) {
         $this->id = $id;
         $this->name = $name;
         $this->type = $type;
         $this->company = $company;
         $this->description = $description;
         $this->address = $address;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
+        $this->location = $location;
         $this->rating = $rating;
         $this->image = $image;
     }

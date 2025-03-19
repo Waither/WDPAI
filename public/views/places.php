@@ -20,7 +20,7 @@
                             require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/Place.php';
                             require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
                             
-                            $places = query("SELECT * FROM tb_places;", "Place");
+                            $places = query("SELECT * FROM tb_place;", "Place");
                             var_dump($places);
                         ?>
                     </div>

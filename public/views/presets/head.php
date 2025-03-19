@@ -19,5 +19,5 @@
     <link rel="stylesheet" href="/public/styles/main.css">
 
     <!-- JavaScript -->
-    <script src="/public/scripts/main.js" type="module"></script>
+    <script src="/public/scripts/js/main.js" type="module"></script>
 </head>

@@ -26,7 +26,6 @@ ENV DB_HOST=db
 ENV DB_NAME=db
 ENV DB_USERNAME=docker
 ENV DB_PASSWORD=docker
-ENV API_KEY=AIzaSyD7kG0WIy9bhFmVKV_qhrLkVwL-0Mt1CXM
 
 RUN apk add --no-cache --virtual .build-deps $BUILD_DEPS \
     && docker-php-ext-configure gd --with-jpeg \

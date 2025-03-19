@@ -17,6 +17,8 @@ class DBconnect {
             // Create new PDO object
             $this->conn = new PDO("pgsql:host={$this->servername};dbname={$this->dbname}", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $this->conn->exec("SET search_path TO truckstop");
         }
         catch (PDOException $e) {
             die("[SQL ERROR] Connection failed: {$e->getMessage()}");
@@ -85,12 +87,17 @@ function query(string $query, string $className, array $params = []) {
 
             // Map data to objects
             // if ($className == 'Place') {
-            //     $data = array_map(function($row) {
-            //         return new Place($row['ID'], $row['name'], $row["company"], $row['description'], $row["address"], $row['latitude'], $row['longitude'], $row['rating'], $row['image']);
-            //     }, $data);
+            //     $data = array_map(
+            //         fn($row) => new Place($row['ID'], $row['name'], $row["type"], $row["company"], $row['description'], $row["address"], $row['latitude'], $row['longitude'], $row['rating'], $row['image']),
+            //         $data);
+            // }
+            // elseif ($className == 'Pin') {
+            //     $data = array_map(
+            //         fn($row) => new Pin($row['ID'], $row['name'], $row['location']),
+            //         $data);
             // }
     
-            return $data;
+            return json_encode($data);
         }
         else {
             throw new Exception($queryType);

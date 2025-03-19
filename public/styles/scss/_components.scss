@@ -67,10 +67,25 @@
     }
 }
 
+#mobileTop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+
+    img {
+        width: 80px;
+    }
+}
+
 #main {
     height: 100vh;
     padding: 2rem;
     flex: 1;
+
+    body[data-mobile="1"] & {
+        padding: 1rem 0.5rem;
+    }
     
     >div {
         background-color: $color-body-bg;

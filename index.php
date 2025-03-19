@@ -1,5 +1,4 @@
 <?php
-// preg_match('/mobile|android|iphone|ipad|phone/i', $userAgent ?? $_SERVER['HTTP_USER_AGENT']) ? 'true' : 'false';
 
 $request = $_SERVER['REQUEST_URI'];
 $viewDir = '/public/views/';
