@@ -34,7 +34,7 @@
         justify-content: space-between;
         flex: 1;
         padding: 10px 5px;
-        gap: 15px;
+        gap: 5px;
 
         .link {
             flex: 1;
@@ -92,6 +92,32 @@
     }
 }
 
+#loginForm {
+    img {
+        height: 124px;
+        width: 124px;
+        margin: 0 auto;
+    }
+
+    body:not([data-mobile]) >#main & {
+        max-width: 540px;
+    }
+
+    button {
+        background: linear-gradient(101deg, var(--Selected-menu, #E8DEF8) -11.24%, #8133FF 112.64%);
+        border: 0;
+        border-radius: 15px;
+    }
+
+    form >.container {
+        width: 80%;
+
+        @media (max-width: 540px) {
+            width: 100%;
+        }
+    }
+}
+
 #containerMap {
     flex: 1;
 
@@ -103,4 +129,227 @@
 #map {
     height: 100%;
     width: 100%;
+}
+
+.badge {
+    padding: $badge-padding-y $badge-padding-x;
+    font-size: $badge-font-size;
+    font-weight: $badge-font-weight;
+    line-height: 1;
+    color: $badge-color;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: $badge-border-radius;
+    display: inline-block;
+
+    &.badge-primary {
+        background-color: var(--primary-bg-subtle);
+        color: var(--primary-text-emphasis);
+
+        i {
+            color: var(--primary-text-emphasis);
+        }
+    }
+
+    &.badge-secondary {
+        background-color: var(--secondary-bg-subtle);
+        color: var(--secondary-text-emphasis);
+
+        i {
+            color: var(--secondary-text-emphasis);
+        }
+    }
+
+    &.badge-success {
+        background-color: var(--success-bg-subtle);
+        color: var(--success-text-emphasis);
+
+        i {
+            color: var(--success-text-emphasis);
+        }
+    }
+
+    &.badge-danger {
+        background-color: var(--danger-bg-subtle);
+        color: var(--danger-text-emphasis);
+
+        i {
+            color: var(--danger-text-emphasis);
+        }
+    }
+
+    &.badge-warning {
+        background-color: var(--warning-bg-subtle);
+        color: var(--warning-text-emphasis);
+
+        i {
+            color: var(--warning-text-emphasis);
+        }
+    }
+
+    &.badge-info {
+        background-color: var(--info-bg-subtle);
+        color: var(--info-text-emphasis);
+
+        i {
+            color: var(--info-text-emphasis);
+        }
+    }
+
+    &.badge-light {
+        background-color: var(--light-bg-subtle);
+        color: var(--light-text-emphasis);
+
+        i {
+            color: var(--light-text-emphasis);
+        }
+    }
+
+    &.badge-dark {
+        background-color: var(--dark-bg-subtle);
+        color: var(--dark-text-emphasis);
+
+        i {
+            color: var(--dark-text-emphasis);
+        }
+    }
+}
+
+.modal {
+    --modal-top-left-top: 10px;
+    --modal-top-left-left: 10px;
+    --modal-top-right-top: 10px;
+    --modal-top-right-right: 10px;
+    --modal-bottom-left-bottom: 10px;
+    --modal-bottom-left-left: 10px;
+    --modal-bottom-right-bottom: 10px;
+    --modal-bottom-right-right: 10px;
+    --modal-fade-top-transform: translate3d(0, -25%, 0);
+    --modal-fade-right-transform: translate3d(25%, 0, 0);
+    --modal-fade-bottom-transform: translate3d(0, 25%, 0);
+    --modal-fade-left-transform: translate3d(-25%, 0, 0);
+    --modal-side-right: 10px;
+    --modal-side-bottom: 10px;
+    --modal-non-invasive-box-shadow: 0 2px 6px -1px rgba(var(--box-shadow-color-rgb), 0.07), 0 6px 18px -1px rgba(var(--box-shadow-color-rgb), 0.04);
+    --modal-non-invasive-box-shadow-top: 0 -10px 20px 0 rgba(var(--box-shadow-color-rgb), 0.05);
+
+    .modal-dialog {
+        &.modal-top { top: 0; }
+        &.modal-left { left: 0; }
+        &.modal-right { right: 0; }
+        &.modal-bottom { bottom: 0; }
+        &.modal-top-left {
+            top: var(--modal-top-left-top);
+            left: var(--modal-top-left-left);
+        }
+        &.modal-top-right {
+            top: var(--modal-top-right-top);
+            right: var(--modal-top-right-right);
+        }
+        &.modal-bottom-left {
+            bottom: var(--modal-bottom-left-bottom);
+            left: var(--modal-bottom-left-left);
+        }
+        &.modal-bottom-right {
+            bottom: var(--modal-bottom-right-bottom);
+            right: var(--modal-bottom-right-right);
+        }
+    }
+
+    &.fade {
+        &.top:not(.show) .modal-dialog { transform: var(--modal-fade-top-transform); }
+        &.right:not(.show) .modal-dialog { transform: var(--modal-fade-right-transform); }
+        &.bottom:not(.show) .modal-dialog { transform: var(--modal-fade-bottom-transform); }
+        &.left:not(.show) .modal-dialog { transform: var(--modal-fade-left-transform); }
+    }
+
+    @media (min-width: 768px) {
+        .modal-dialog {
+            &.modal-top { top: 0; }
+            &.modal-left { left: 0; }
+            &.modal-right { right: 0; }
+            &.modal-top-left {
+                top: var(--modal-top-left-top);
+                left: var(--modal-top-left-left);
+            }
+            &.modal-top-right {
+                top: var(--modal-top-right-top);
+                right: var(--modal-top-right-right);
+            }
+            &.modal-bottom-left {
+                bottom: var(--modal-bottom-left-bottom);
+                left: var(--modal-bottom-left-left);
+            }
+            &.modal-bottom-right {
+                bottom: var(--modal-bottom-right-bottom);
+                right: var(--modal-bottom-right-right);
+            }
+        }
+    }
+
+    @media (min-width: 992px) {
+        .modal-side {
+            position: absolute;
+            width: 100%;
+            right: var(--modal-side-right);
+            bottom: var(--modal-side-bottom);
+            margin: 0;
+        }
+
+        .modal-frame {
+            position: absolute;
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        .modal-non-invasive-open {
+            overflow-y: auto;
+
+            .modal-non-invasive-show {
+                display: table;
+
+                .modal-dialog {
+                    &.modal-bottom-right { bottom: 0; }
+                    &.modal-bottom-left { bottom: 0; }
+                }
+
+                .modal-side {
+                    bottom: 0;
+                }
+
+                &.modal.frame.bottom {
+                    box-shadow: var(--modal-non-invasive-box-shadow-top);
+
+                    .modal-content {
+                        box-shadow: var(--modal-non-invasive-box-shadow-top);
+                    }
+                }
+
+                &.modal.frame.top {
+                    box-shadow: var(--modal-non-invasive-box-shadow);
+                }
+
+                .modal-side {
+                    &.modal-bottom-right .modal-content,
+                    &.modal-bottom-left .modal-content {
+                        box-shadow: var(--modal-non-invasive-box-shadow-top);
+                    }
+                }
+            }
+        }
+    }
+
+    .modal-non-invasive-open {
+        .modal-non-invasive-show {
+            .modal-dialog {
+                &.modal-bottom-right { right: 0; }
+                &.modal-bottom-left { left: 0; }
+                &.modal-top-left { left: 0; }
+            }
+
+            .modal-side { right: 0; }
+        }
+    }
 }

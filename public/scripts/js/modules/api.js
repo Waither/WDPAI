@@ -1,11 +1,11 @@
-"use strict";
-
 export async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
 
-    let map = new Map(document.getElementById("map"), {
-        zoom: 6,
-        center: { lat: 52.2297, lng: 21.0122 },
+    const position = { lat: 52.210, lng: 20.982 };
+
+    const map = new Map(document.getElementById("map"), {
+        zoom: 5,
+        center: position,
         mapId: "DEMO_MAP_ID",
     });
 
@@ -13,7 +13,18 @@ export async function initMap() {
 }
 
 export async function addMarker(map, position, title) {
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    const { AdvancedMarkerElement  } = await google.maps.importLibrary("marker");
 
-    const marker = new AdvancedMarkerElement({ map, position, title});
+    const marker = new AdvancedMarkerElement({ position, map, title });
+
+    return marker;
+}
+
+export async function clearMarkers(markers) {
+    markers.forEach(({ marker }) => {
+        if (marker) {
+            marker.setMap(null);
+        }
+    });
+    return markers = [];
 }

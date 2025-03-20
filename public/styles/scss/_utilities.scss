@@ -160,3 +160,108 @@ $justify-content-map: (
         height: #{$size * 1%} !important;
     }
 }
+
+// Perfect Scrollbar styles
+.ps {
+    --scrollbar-rail-x-y-transition-opacity-bg: background-color 0.2s linear, opacity 0.2s linear;
+    --scrollbar-z-index: 1035;
+    --scrollbar-rail-x-y-length: 0.9375rem;
+    --scrollbar-rail-x-y-opacity: 0.6;
+    --scrollbar-rail-x-y-hover-opacity: 0.9;
+    --scrollbar-rail-x-y-bg-color: var(--scrollbar-rail-bg);
+    --scrollbar-rail-x-y-clicking-length: 0.6875rem;
+    --scrollbar-rail-x-transition-height-bg: background-color 0.2s linear, height 0.2s ease-in-out;
+    --scrollbar-rail-y-transition-width-bg: background-color 0.2s linear, width 0.2s ease-in-out;
+    --scrollbar-thumb-x-y-color: var(--scrollbar-thumb-bg);
+    --scrollbar-thumb-x-y-border-radius: 0.375rem;
+    --scrollbar-thumb-x-y-length: 0.375rem;
+    --scrollbar-thumb-x-y-position-length: 0.125rem;
+    overflow: hidden !important;
+    overflow-anchor: none;
+    touch-action: auto;
+
+    &__rail-x,
+    &__rail-y {
+        display: none;
+        opacity: 0;
+        transition: var(--scrollbar-rail-x-y-transition-opacity-bg);
+        position: absolute;
+        z-index: var(--scrollbar-z-index);
+    }
+
+    &__rail-x {
+        height: var(--scrollbar-rail-x-y-length);
+        bottom: 0;
+    }
+
+    &__rail-y {
+        width: var(--scrollbar-rail-x-y-length);
+        right: 0;
+    }
+
+    &--active-x > &__rail-x,
+    &--active-y > &__rail-y {
+        display: block;
+        background-color: transparent;
+    }
+
+    &:hover > &__rail-x,
+    &:hover > &__rail-y,
+    &--focus > &__rail-x,
+    &--focus > &__rail-y,
+    &--scrolling-x > &__rail-x,
+    &--scrolling-y > &__rail-y {
+        opacity: var(--scrollbar-rail-x-y-opacity);
+    }
+
+    &__rail-x:hover,
+    &__rail-y:hover,
+    &__rail-x:focus,
+    &__rail-y:focus,
+    &__rail-x.ps--clicking,
+    &__rail-y.ps--clicking {
+        background-color: var(--scrollbar-rail-x-y-bg-color);
+        opacity: var(--scrollbar-rail-x-y-hover-opacity);
+    }
+
+    // Scrollbar thumb styles
+    &__thumb-x,
+    &__thumb-y {
+        background-color: var(--scrollbar-thumb-x-y-color);
+        border-radius: var(--scrollbar-thumb-x-y-border-radius);
+        position: absolute;
+    }
+
+    &__thumb-x {
+        transition: var(--scrollbar-rail-x-transition-height-bg);
+        height: var(--scrollbar-thumb-x-y-length);
+        bottom: var(--scrollbar-thumb-x-y-position-length);
+    }
+
+    &__thumb-y {
+        transition: var(--scrollbar-rail-y-transition-width-bg);
+        width: var(--scrollbar-thumb-x-y-length);
+        right: var(--scrollbar-thumb-x-y-position-length);
+    }
+
+    &__rail-x:hover > &__thumb-x,
+    &__rail-x:focus > &__thumb-x,
+    &__rail-x.ps--clicking &__thumb-x {
+        height: var(--scrollbar-rail-x-y-clicking-length);
+    }
+
+    &__rail-y:hover > &__thumb-y,
+    &__rail-y:focus > &__thumb-y,
+    &__rail-y.ps--clicking &__thumb-y {
+        width: var(--scrollbar-rail-x-y-clicking-length);
+    }
+
+    // MS supports
+    @supports (-ms-overflow-style: none) {
+        overflow: auto !important;
+    }
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        overflow: auto !important;
+    }
+}

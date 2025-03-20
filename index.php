@@ -7,7 +7,11 @@ $routes = [
     '/' => 'home.php',
     '/places' => 'places.php',
     '/map' => 'map.php',
-    '/'
+    '/login' => 'login.php',
+    '/register' => 'register.php',
+    '/user' => 'user.php',
+    '/admin' => 'admin.php',
+    '/moderator' => 'moderator.php',
 ];
 
 $page = $routes[$request] ?? 'presets/errors/404.html';

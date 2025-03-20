@@ -5,7 +5,6 @@ class Place {
     private string $name;
     private string $type;
     private string $company;
-    private string $description;
     private string $address;
     private array $location;
     private float $rating;
@@ -16,7 +15,6 @@ class Place {
         $this->name = $name;
         $this->type = $type;
         $this->company = $company;
-        $this->description = $description;
         $this->address = $address;
         $this->location = $location;
         $this->rating = $rating;

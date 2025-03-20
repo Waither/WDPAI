@@ -15,9 +15,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
     const routes = [
         { path: "/places", module: PLACE },
         { path: "/map", module: MAP },
+        { path: "/favourite", module: FAVOURITE },
         { path: "/login", module: LOGIN },
         { path: "/register", module: REGISTER },
-        { path: "/favourite", module: FAVOURITE },
         { path: "/admin", module: ADMIN },
         { path: "/user", module: USER },
         { path: "/moderator", module: MOD },
@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     ];
 
     const currentRoute = routes.find(route => window.location.href.includes(route.path));
-
-    console.log(currentRoute);
 
     if (currentRoute) {
         currentRoute.module.initSite();

@@ -1,0 +1,258 @@
+// Variables
+$animation-delays: (
+    1s: 1s,
+    2s: 2s,
+    3s: 3s,
+    4s: 4s,
+    5s: 5s
+);
+
+$animation-durations: (
+    fast: 800ms,
+    faster: 500ms,
+    slow: 2s,
+    slower: 3s
+);
+
+$fade-in-transforms: (
+    down: (from: translate3d(0, -100%, 0), to: translate3d(0, 0, 0)),
+    left: (from: translate3d(-100%, 0, 0), to: translate3d(0, 0, 0)),
+    right: (from: translate3d(100%, 0, 0), to: translate3d(0, 0, 0)),
+    up: (from: translate3d(0, 100%, 0), to: translate3d(0, 0, 0))
+);
+
+$fade-out-transforms: (
+    down: translate3d(0, 100%, 0),
+    left: translate3d(-100%, 0, 0),
+    right: translate3d(100%, 0, 0),
+    up: translate3d(0, -100%, 0)
+);
+
+$slide-in-transforms: (
+    down: (from: translate3d(0, -100%, 0), to: translate3d(0, 0, 0)),
+    left: (from: translate3d(-100%, 0, 0), to: translate3d(0, 0, 0)),
+    right: (from: translate3d(100%, 0, 0), to: translate3d(0, 0, 0)),
+    up: (from: translate3d(0, 100%, 0), to: translate3d(0, 0, 0))
+);
+
+$slide-out-transforms: (
+    down: translate3d(0, 100%, 0),
+    left: translate3d(-100%, 0, 0),
+    right: translate3d(100%, 0, 0),
+    up: translate3d(0, -100%, 0)
+);
+
+$zoom-transforms: (
+    in: scale3d(0.3, 0.3, 0.3),
+    out: scale3d(0.3, 0.3, 0.3)
+);
+
+$tada-transforms: (
+    from: scale3d(1, 1, 1),
+    20: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg),
+    90: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg),
+    80: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg),
+    to: scale3d(1, 1, 1)
+);
+
+$pulse-transforms: (
+    from: scale3d(1, 1, 1),
+    50: scale3d(1.05, 1.05, 1.05),
+    to: scale3d(1, 1, 1)
+);
+
+// Mixins
+@mixin animation-delay($delay) {
+    animation-delay: map-get($animation-delays, $delay);
+}
+
+@mixin animation-duration($duration) {
+    animation-duration: map-get($animation-durations, $duration);
+}
+
+@mixin fade-in($direction) {
+    --animation-fade-in-transform-from: map-get(map-get($fade-in-transforms, $direction), from);
+    --animation-fade-in-transform-to: map-get(map-get($fade-in-transforms, $direction), to);
+    animation-name: fade-in-#{$direction};
+}
+
+@mixin fade-out($direction) {
+    --animation-fade-out-transform-to: map-get($fade-out-transforms, $direction);
+    animation-name: fade-out-#{$direction};
+}
+
+@mixin slide-in($direction) {
+    --animation-slide-in-transform-from: map-get(map-get($slide-in-transforms, $direction), from);
+    --animation-slide-in-transform-to: map-get(map-get($slide-in-transforms, $direction), to);
+    animation-name: slide-in-#{$direction};
+}
+
+@mixin slide-out($direction) {
+    --animation-slide-out-transform-from: translate3d(0, 0, 0);
+    --animation-slide-out-transform-to: map-get($slide-out-transforms, $direction);
+    animation-name: slide-out-#{$direction};
+}
+
+// Base styles
+.animation {
+    @each $delay, $value in $animation-delays {
+        &.delay-#{$delay} {
+            @include animation-delay($delay);
+        }
+    }
+
+    @each $duration, $value in $animation-durations {
+        &.#{$duration} {
+            @include animation-duration($duration);
+        }
+    }
+
+    &.infinite {
+        animation-iteration-count: infinite;
+    }
+}
+
+// Keyframes and classes
+@each $direction, $transforms in $fade-in-transforms {
+    @keyframes fade-in-#{$direction} {
+        from {
+            opacity: 0;
+            transform: var(--animation-fade-in-transform-from);
+        }
+        to {
+            opacity: 1;
+            transform: var(--animation-fade-in-transform-to);
+        }
+    }
+
+    .fade-in-#{$direction} {
+        @include fade-in($direction);
+    }
+}
+
+@each $direction, $transform in $fade-out-transforms {
+    @keyframes fade-out-#{$direction} {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            transform: var(--animation-fade-out-transform-to);
+        }
+    }
+
+    .fade-out-#{$direction} {
+        @include fade-out($direction);
+    }
+}
+
+@each $direction, $transforms in $slide-in-transforms {
+    @keyframes slide-in-#{$direction} {
+        from {
+            visibility: visible;
+            transform: var(--animation-slide-in-transform-from);
+        }
+        to {
+            transform: var(--animation-slide-in-transform-to);
+        }
+    }
+
+    .slide-in-#{$direction} {
+        @include slide-in($direction);
+    }
+}
+
+@each $direction, $transform in $slide-out-transforms {
+    @keyframes slide-out-#{$direction} {
+        from {
+            transform: var(--animation-slide-out-transform-from);
+        }
+        to {
+            visibility: hidden;
+            transform: var(--animation-slide-out-transform-to);
+        }
+    }
+
+    .slide-out-#{$direction} {
+        @include slide-out($direction);
+    }
+}
+
+@keyframes zoom-in {
+    from {
+        opacity: 0;
+        transform: var(--animation-zoom-in-transform-from);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.zoom-in {
+    --animation-zoom-in-transform-from: map-get($zoom-transforms, in);
+    animation-name: zoom-in;
+}
+
+@keyframes zoom-out {
+    from {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+        transform: var(--animation-zoom-out-transform-50);
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.zoom-out {
+    --animation-zoom-out-transform-50: map-get($zoom-transforms, out);
+    animation-name: zoom-out;
+}
+
+@keyframes tada {
+    from {
+        transform: var(--animation-tada-transform-from);
+    }
+    10%, 20% {
+        transform: var(--animation-tada-transform-20);
+    }
+    30%, 50%, 70%, 90% {
+        transform: var(--animation-tada-transform-90);
+    }
+    40%, 60%, 80% {
+        transform: var(--animation-tada-transform-80);
+    }
+    to {
+        transform: var(--animation-tada-transform-to);
+    }
+}
+
+.tada {
+    --animation-tada-transform-from: map-get($tada-transforms, from);
+    --animation-tada-transform-20: map-get($tada-transforms, 20);
+    --animation-tada-transform-90: map-get($tada-transforms, 90);
+    --animation-tada-transform-80: map-get($tada-transforms, 80);
+    --animation-tada-transform-to: map-get($tada-transforms, to);
+    animation-name: tada;
+}
+
+@keyframes pulse {
+    from {
+        transform: var(--animation-pulse-transform-from);
+    }
+    50% {
+        transform: var(--animation-pulse-transform-50);
+    }
+    to {
+        transform: var(--animation-pulse-transform-to);
+    }
+}
+
+.pulse {
+    --animation-pulse-transform-from: map-get($pulse-transforms, from);
+    --animation-pulse-transform-50: map-get($pulse-transforms, 50);
+    --animation-pulse-transform-to: map-get($pulse-transforms, to);
+    animation-name: pulse;
+}
