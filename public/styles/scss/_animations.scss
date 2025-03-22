@@ -8,13 +8,14 @@ $animation-delays: (
 );
 
 $animation-durations: (
-    fast: 800ms,
-    faster: 500ms,
-    slow: 2s,
-    slower: 3s
+    default: 1s,
+    500ms: 500ms,
+    800ms: 800ms,
+    2000ms: 2s
 );
 
 $fade-in-transforms: (
+    default: (from: translate3d(0, 0, 0), to: translate3d(0, 0, 0)),
     down: (from: translate3d(0, -100%, 0), to: translate3d(0, 0, 0)),
     left: (from: translate3d(-100%, 0, 0), to: translate3d(0, 0, 0)),
     right: (from: translate3d(100%, 0, 0), to: translate3d(0, 0, 0)),
@@ -22,6 +23,7 @@ $fade-in-transforms: (
 );
 
 $fade-out-transforms: (
+    default: translate3d(0, 0, 0),
     down: translate3d(0, 100%, 0),
     left: translate3d(-100%, 0, 0),
     right: translate3d(100%, 0, 0),
@@ -29,6 +31,7 @@ $fade-out-transforms: (
 );
 
 $slide-in-transforms: (
+    default: (from: translate3d(0, 0, 0), to: translate3d(0, 0, 0)),
     down: (from: translate3d(0, -100%, 0), to: translate3d(0, 0, 0)),
     left: (from: translate3d(-100%, 0, 0), to: translate3d(0, 0, 0)),
     right: (from: translate3d(100%, 0, 0), to: translate3d(0, 0, 0)),
@@ -36,6 +39,7 @@ $slide-in-transforms: (
 );
 
 $slide-out-transforms: (
+    default: translate3d(0, 0, 0),
     down: translate3d(0, 100%, 0),
     left: translate3d(-100%, 0, 0),
     right: translate3d(100%, 0, 0),
@@ -70,31 +74,34 @@ $pulse-transforms: (
     animation-duration: map-get($animation-durations, $duration);
 }
 
-@mixin fade-in($direction) {
-    --animation-fade-in-transform-from: map-get(map-get($fade-in-transforms, $direction), from);
-    --animation-fade-in-transform-to: map-get(map-get($fade-in-transforms, $direction), to);
+@mixin fade-in($direction: default) {
+    --animation-fade-in-transform-from: #{map-get(map-get($fade-in-transforms, $direction), from)};
+    --animation-fade-in-transform-to: #{map-get(map-get($fade-in-transforms, $direction), to)};
     animation-name: fade-in-#{$direction};
 }
 
-@mixin fade-out($direction) {
-    --animation-fade-out-transform-to: map-get($fade-out-transforms, $direction);
+@mixin fade-out($direction: default) {
+    --animation-fade-out-transform-to: #{map-get($fade-out-transforms, $direction)};
     animation-name: fade-out-#{$direction};
 }
 
-@mixin slide-in($direction) {
-    --animation-slide-in-transform-from: map-get(map-get($slide-in-transforms, $direction), from);
-    --animation-slide-in-transform-to: map-get(map-get($slide-in-transforms, $direction), to);
+@mixin slide-in($direction: default) {
+    --animation-slide-in-transform-from: #{map-get(map-get($slide-in-transforms, $direction), from)};
+    --animation-slide-in-transform-to: #{map-get(map-get($slide-in-transforms, $direction), to)};
     animation-name: slide-in-#{$direction};
 }
 
-@mixin slide-out($direction) {
+@mixin slide-out($direction: default) {
     --animation-slide-out-transform-from: translate3d(0, 0, 0);
-    --animation-slide-out-transform-to: map-get($slide-out-transforms, $direction);
+    --animation-slide-out-transform-to: #{map-get($slide-out-transforms, $direction)};
     animation-name: slide-out-#{$direction};
 }
 
 // Base styles
 .animation {
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
     @each $delay, $value in $animation-delays {
         &.delay-#{$delay} {
             @include animation-delay($delay);
@@ -102,7 +109,7 @@ $pulse-transforms: (
     }
 
     @each $duration, $value in $animation-durations {
-        &.#{$duration} {
+        &.animation-#{$duration} {
             @include animation-duration($duration);
         }
     }

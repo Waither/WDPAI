@@ -33,3 +33,31 @@ document.addEventListener("DOMContentLoaded", (e) => {
         console.error("Unknown page");
     }
 });
+
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetHref = link.href;
+
+        const main = document.querySelector('#main');
+        main.classList.remove('fade-in-default');
+        main.classList.add('fade-out-default');
+
+        const mainStyles = getComputedStyle(main);
+        const animationDuration = parseFloat(mainStyles.animationDuration) * 1000;
+        const fadeOutDuration = animationDuration - 100;
+
+        if (targetHref.includes("/login") && !window.location.href.includes("/register")) {
+            const nav = document.querySelector('nav');
+            nav.classList.add('animation', 'animation-500ms', nav.id === 'menuBottom' ? 'fade-out-down' : 'fade-out-left');
+
+            if (nav.id === 'menuBottom') {
+                document.getElementById("mobileTop").classList.add('animation', 'animation-500ms', 'fade-out-up');
+            }
+        }
+
+        setTimeout(() => {
+            window.location.href = targetHref;
+        }, fadeOutDuration);
+    });
+});

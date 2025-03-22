@@ -26,7 +26,7 @@ class DBconnect {
     }
 
     // Function to get data (DQL)
-    public function getData(string $query, array $params = []) {
+    public function getData(string $query, array $params = []): array {
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
@@ -39,7 +39,7 @@ class DBconnect {
     }
 
     // Function to execute query (DML)
-    public function executeQuery(string $query, array $params = []) {
+    public function executeQuery(string $query, array $params = []): bool {
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
@@ -51,6 +51,10 @@ class DBconnect {
         }
     }
 
+    public function getConn(): PDO {
+        return $this->conn;
+    }
+
     // Class destructor
     public function __destruct() {
         if ($this->conn !== null) {
@@ -59,7 +63,7 @@ class DBconnect {
     }
 }
 
-function query(string $query, string $className, array $params = []) {
+function query(string $query, array $params = [], string $className = NULL): array|bool|string {
     $db = new DBconnect();
 
     // Arrays with DML & DQL commands
@@ -69,7 +73,7 @@ function query(string $query, string $className, array $params = []) {
     // Uppercase and extract the first query word
     $queryType = strtoupper(strtok($query, ' '));
 
-    // Check if first query word is DML Command 
+    // Check if first query word is DML Command
     try {
         if (in_array($queryType, $dmlCommands)) {
 
@@ -97,7 +101,7 @@ function query(string $query, string $className, array $params = []) {
             //         $data);
             // }
     
-            return json_encode($data);
+            return $data;
         }
         else {
             throw new Exception($queryType);

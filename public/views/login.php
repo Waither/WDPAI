@@ -1,18 +1,14 @@
-<?php
-    if (isset($_COOKIE['user'])) {
-        header('Location: /');
-    }
-?>
+<?php if (isset($_COOKIE['user'])) header('Location: /'); ?>
 <!DOCTYPE html>
 <html lang="pl">
 <?php include 'presets/head.php'; ?>
 <?php $mobile = preg_match('/Mobile|Android|iPhone|iPad/', $_SERVER['HTTP_USER_AGENT']) ? true : false; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
-    <div id="main" class="d-flex flex-column justify-content-center">
-        <div id="loginForm" class="container d-flex flex-column rounded-5 shadow pt-3 pb-5">
+    <div id="main" class="d-flex flex-column justify-content-center animation fade-in-default animation-500ms">
+        <div id="loginForm" class="container d-flex flex-column rounded-5 shadow pt-3 pb-5"> 
             <img src="/public/img/logo.png" alt="Logo">
             <h1 class="text-center fs-1 text-capitalize">Login</h1>
-            <form action="" class="d-flex flex-column gap-sm-3">
+            <form action="" class="d-flex flex-column gap-sm-3" novalidate>
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mb-3">

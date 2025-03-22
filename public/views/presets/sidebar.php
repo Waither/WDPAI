@@ -29,7 +29,7 @@
             if (isset($_COOKIE['user'])) {
                 require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
 
-                $user = query('SELECT * FROM tb_user WHERE "ID_special" = :ID', "User",[ ":ID" => $_COOKIE['user'] ]);
+                $user = query('SELECT * FROM tb_user WHERE "ID_special" = :ID', [ ":ID" => $_COOKIE['user'] ]);
             }
 
             foreach ($links as $link) {

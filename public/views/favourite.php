@@ -8,7 +8,10 @@
 
     <div id="main" class="animation fade-in-default animation-500ms">
         <div class="h-100 d-flex flex-column p-4 rounded-5 shadow">
-
+            <h1 class="text-center">Favourite</h1>
+            <div class="under-construction container d-flex flex-column justify-content-center">
+                <h1 class="text-center">UNDER CONSTRUCTION</h1>
+            </div>
         </div>
     </div>
 </body>

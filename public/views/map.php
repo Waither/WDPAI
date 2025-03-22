@@ -5,13 +5,13 @@
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <?php require_once 'presets/sidebar.php'; ?>
 
-    <div id="main">
+    <div id="main" class="animation fade-in-default animation-500ms">
         <div class="h-100 d-flex flex-column p-4 rounded-5 shadow">
             <h1 class="text-center">Map</h1>
             <div id="containerMap" class="container d-flex flex-column">
                 <div class="row">
                     <div class="col-12 mb-3">
-                        SEARCH BAR
+                        <input type="text" id="seachBar" class="form-control" placeholder="Search for places...">
                     </div>
                 </div>
                 <div class="row">

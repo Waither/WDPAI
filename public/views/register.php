@@ -1,8 +1,4 @@
-<?php
-    if (isset($_COOKIE['user'])) {
-        header('Location: /');
-    }
-?>
+<?php if (isset($_COOKIE['user'])) header('Location: /'); ?>
 <!DOCTYPE html>
 <html lang="pl">
 <?php include 'presets/head.php'; ?>
@@ -17,25 +13,25 @@
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" id="name" class="form-control form-control-lg" required>
+                            <input type="text" id="name" name="name" class="form-control form-control-lg" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="" class="form-control form-control-lg" required>
+                            <input type="email" id="email" name="email" class="form-control form-control-lg" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" class="form-control form-control-lg" required>
+                            <input type="password" id="password" name="password" class="form-control form-control-lg" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 mb-4">
-                            <label for="confirmpassword" class="form-label">Confirm Password</label>
-                            <input type="password" id="confirmpassword" class="form-control form-control-lg" required>
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control form-control-lg" required>
                         </div>
                     </div>
                     <div class="row">

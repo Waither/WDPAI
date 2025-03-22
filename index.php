@@ -7,6 +7,7 @@ $routes = [
     '/' => 'home.php',
     '/places' => 'places.php',
     '/map' => 'map.php',
+    '/favourite' => 'favourite.php',
     '/login' => 'login.php',
     '/register' => 'register.php',
     '/user' => 'user.php',
@@ -14,9 +15,9 @@ $routes = [
     '/moderator' => 'moderator.php',
 ];
 
-$page = $routes[$request] ?? 'presets/errors/404.html';
+$page = $routes[$request] ?? 'presets/errors/501.php';
 if (!file_exists(__DIR__."{$viewDir}{$page}")) {
-    $page = 'presets/errors/501.html';
+    $page = 'presets/errors/404.php';
 }
 
 require __DIR__."{$viewDir}{$page}";
