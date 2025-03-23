@@ -79,7 +79,6 @@
 }
 
 #main {
-    height: 100vh;
     padding: 2rem;
     flex: 1;
 
@@ -144,74 +143,74 @@
     display: inline-block;
 
     &.badge-primary {
-        background-color: var(--primary-bg-subtle);
-        color: var(--primary-text-emphasis);
+        background-color: var(--color-primary-bg-subtle);
+        color: var(--color-primary-text-emphasis);
 
         i {
-            color: var(--primary-text-emphasis);
+            color: var(--color-primary-text-emphasis);
         }
     }
 
     &.badge-secondary {
-        background-color: var(--secondary-bg-subtle);
-        color: var(--secondary-text-emphasis);
+        background-color: var(--color-secondary-bg-subtle);
+        color: var(--color-secondary-text-emphasis);
 
         i {
-            color: var(--secondary-text-emphasis);
+            color: var(--color-secondary-text-emphasis);
         }
     }
 
     &.badge-success {
-        background-color: var(--success-bg-subtle);
-        color: var(--success-text-emphasis);
+        background-color: var(--color-success-bg-subtle);
+        color: var(--color-success-text-emphasis);
 
         i {
-            color: var(--success-text-emphasis);
+            color: var(--color-success-text-emphasis);
         }
     }
 
     &.badge-danger {
-        background-color: var(--danger-bg-subtle);
-        color: var(--danger-text-emphasis);
+        background-color: var(--color-danger-bg-subtle);
+        color: var(--color-danger-text-emphasis);
 
         i {
-            color: var(--danger-text-emphasis);
+            color: var(--color-danger-text-emphasis);
         }
     }
 
     &.badge-warning {
-        background-color: var(--warning-bg-subtle);
-        color: var(--warning-text-emphasis);
+        background-color: var(--color-warning-bg-subtle);
+        color: var(--color-warning-text-emphasis);
 
         i {
-            color: var(--warning-text-emphasis);
+            color: var(--color-warning-text-emphasis);
         }
     }
 
     &.badge-info {
-        background-color: var(--info-bg-subtle);
-        color: var(--info-text-emphasis);
+        background-color: var(--color-info-bg-subtle);
+        color: var(--color-info-text-emphasis);
 
         i {
-            color: var(--info-text-emphasis);
+            color: var(--color-info-text-emphasis);
         }
     }
 
     &.badge-light {
-        background-color: var(--light-bg-subtle);
-        color: var(--light-text-emphasis);
+        background-color: var(--color-light-bg-subtle);
+        color: var(--color-light-text-emphasis);
 
         i {
-            color: var(--light-text-emphasis);
+            color: var(--color-light-text-emphasis);
         }
     }
 
     &.badge-dark {
-        background-color: var(--dark-bg-subtle);
-        color: var(--dark-text-emphasis);
+        background-color: var(--color-dark-bg-subtle);
+        color: var(--color-dark-text-emphasis);
 
         i {
-            color: var(--dark-text-emphasis);
+            color: var(--color-dark-text-emphasis);
         }
     }
 }
@@ -577,8 +576,13 @@
 }
 
 .scroll-box {
-    max-height: 500px;
+    height: 100px;
     overflow-y: scroll;
+    overflow-x: visible;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   
     // Firefox
     scrollbar-width: thin;
@@ -604,4 +608,222 @@
         }
     }
 }
-  
+
+.card {
+    --card-spacer-y: 1.5rem;
+    --card-spacer-x: 1.5rem;
+    --card-title-spacer-y: 0.5rem;
+    --card-title-color: ;
+    --card-subtitle-color: ;
+    --card-border-width: var(--border-width);
+    --card-border-color: rgba(0, 0, 0, 0.175);
+    --card-border-radius: 0.5rem;
+    --card-box-shadow: 0 2px 15px -3px rgba(var(--box-shadow-color-rgb), 0.07), 0 10px 20px -2px rgba(var(--box-shadow-color-rgb), 0.04);
+    --card-inner-border-radius: calc(0.5rem - (var(--border-width)));
+    --card-cap-padding-y: 0.75rem;
+    --card-cap-padding-x: 1.5rem;
+    --card-cap-bg: rgba(255, 255, 255, 0);
+    --card-cap-color: ;
+    --card-height: ;
+    --card-color: ;
+    --card-bg: var(--surface-bg);
+    --card-img-overlay-padding: 1.5rem;
+    --card-group-margin: 0.75rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: var(--card-height);
+    color: var(--body-color);
+    word-wrap: break-word;
+    background-color: var(--card-bg);
+    background-clip: border-box;
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-box-shadow);
+
+    > hr {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    > .list-group {
+        border-top: inherit;
+        border-bottom: inherit;
+
+        &:first-child {
+            border-top-width: 0;
+            border-top-left-radius: var(--card-inner-border-radius);
+            border-top-right-radius: var(--card-inner-border-radius);
+        }
+
+        &:last-child {
+            border-bottom-width: 0;
+            border-bottom-right-radius: var(--card-inner-border-radius);
+            border-bottom-left-radius: var(--card-inner-border-radius);
+        }
+    }
+
+    > .card-header + .list-group,
+    > .list-group + .card-footer {
+        border-top: 0;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: var(--card-spacer-y) var(--card-spacer-x);
+        color: var(--card-color);
+    }
+
+    .card-title {
+        margin-bottom: var(--card-title-spacer-y);
+        color: var(--card-title-color);
+    }
+
+    .card-subtitle {
+        margin-top: calc(-0.5 * var(--card-title-spacer-y));
+        margin-bottom: 0;
+        color: var(--card-subtitle-color);
+    }
+
+    .card-text:last-child {
+        margin-bottom: 0;
+    }
+
+    .card-link + .card-link {
+        margin-left: var(--card-spacer-x);
+    }
+
+    .card-header {
+        padding: var(--card-cap-padding-y) var(--card-cap-padding-x);
+        margin-bottom: 0;
+        color: var(--card-cap-color);
+        background-color: var(--card-cap-bg);
+        border-bottom: var(--card-border-width) solid var(--card-border-color);
+
+        &:first-child {
+            border-radius: var(--card-inner-border-radius) var(--card-inner-border-radius) 0 0;
+        }
+    }
+
+    .card-footer {
+        padding: var(--card-cap-padding-y) var(--card-cap-padding-x);
+        color: var(--card-cap-color);
+        background-color: var(--card-cap-bg);
+        border-top: var(--card-border-width) solid var(--card-border-color);
+
+        &:last-child {
+            border-radius: 0 0 var(--card-inner-border-radius) var(--card-inner-border-radius);
+        }
+    }
+
+    .card-header-tabs {
+        margin-right: calc(-0.5 * var(--card-cap-padding-x));
+        margin-bottom: calc(-1 * var(--card-cap-padding-y));
+        margin-left: calc(-0.5 * var(--card-cap-padding-x));
+        border-bottom: 0;
+
+        .nav-link.active {
+            background-color: var(--card-bg);
+            border-bottom-color: var(--card-bg);
+        }
+    }
+
+    .card-header-pills {
+        margin-right: calc(-0.5 * var(--card-cap-padding-x));
+        margin-left: calc(-0.5 * var(--card-cap-padding-x));
+    }
+
+    .card-img-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: var(--card-img-overlay-padding);
+        border-radius: var(--card-inner-border-radius);
+    }
+
+    .card-img,
+    .card-img-top,
+    .card-img-bottom {
+        width: 100%;
+    }
+
+    .card-img,
+    .card-img-top {
+        border-top-left-radius: var(--card-inner-border-radius);
+        border-top-right-radius: var(--card-inner-border-radius);
+    }
+
+    .card-img,
+    .card-img-bottom {
+        border-bottom-right-radius: var(--card-inner-border-radius);
+        border-bottom-left-radius: var(--card-inner-border-radius);
+    }
+}
+
+.cardPlace {
+    &:hover {
+        cursor: pointer;
+        background-color: #f0f0f0;
+        box-shadow: $box-shadow;
+    }
+
+    .badge {
+        height: 72px;
+        width: 72px;
+        
+        i {
+            font-size: 2rem;
+        }
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0 0.5rem 0.5rem 0;
+
+        max-width: 300px;
+
+        body[data-mobile="1"] & {
+            display: none;
+        }
+    }
+
+    .cardStars {
+        color: var(--color-yellow);
+    }
+
+    .half-star {
+        background: linear-gradient(to right, var(--color-yellow) 50%, #343a40 50%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    
+        .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            top: -40px;
+            left: -20px;
+        }
+    
+        &:hover .tooltiptext {
+            visibility: visible;
+        }
+    }
+}
+
+

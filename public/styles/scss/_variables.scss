@@ -6,7 +6,7 @@ $color-blue: #2196f3;
 $color-cyan: #00bcd4;
 $color-teal: #009688;
 $color-green: #4caf50;
-$color-yellow: #ffeb3b;
+$color-yellow: #ffd700;
 $color-orange: #ff9800;
 $color-white: #fff;
 $color-black: #000;
@@ -22,7 +22,7 @@ $color-gray-600: #757575;
 $color-gray-700: #616161;
 $color-gray-800: #4f4f4f;
 $color-gray-900: #262626;
-$color-primary: #E8DEF8;
+$color-primary: #e8def8;
 $color-secondary: #c2a8ec;
 $color-success: #14a44d;
 $color-danger: #dc4c64;
@@ -41,21 +41,23 @@ $color-light-rgb: 251, 251, 251;
 $color-dark-rgb: 51, 45, 45;
 
 $color-primary-text-emphasis: #2f5aa2;
-$color-secondary-text-emphasis: #404247;
+$color-secondary-text-emphasis: #c2a8ec;
 $color-success-text-emphasis: #0c622e;
 $color-info-text-emphasis: #3b7e94;
 $color-warning-text-emphasis: #896110;
 $color-danger-text-emphasis: #b03d50;
 $color-light-text-emphasis: #616161;
 $color-dark-text-emphasis: #eeeeee;
+
 $color-primary-bg-subtle: #e2eaf7;
-$color-secondary-bg-subtle: #f1f2f3;
+$color-secondary-bg-subtle: #d6cbe7;
 $color-success-bg-subtle: #dcf1e4;
 $color-info-bg-subtle: #e5f4f8;
 $color-warning-bg-subtle: #fbf1dd;
 $color-danger-bg-subtle: #fae4e8;
 $color-light-bg-subtle: #f5f5f5;
 $color-dark-bg-subtle: #262626;
+
 $color-primary-border-subtle: #b1c6ea;
 $color-secondary-border-subtle: #d9dbe0;
 $color-success-border-subtle: #a1dbb8;
@@ -83,33 +85,6 @@ $spacing-unit: 8px;
 $border-radius: 4px;
 $transition-duration: 0.5s;
 $transition-timing-function: ease-in-out;
-
-$color-primary-text-emphasis: #2f5aa2;
-$color-secondary-text-emphasis: #404247;
-$color-success-text-emphasis: #0c622e;
-$color-info-text-emphasis: #3b7e94;
-$color-warning-text-emphasis: #896110;
-$color-danger-text-emphasis: #b03d50;
-$color-light-text-emphasis: #616161;
-$color-dark-text-emphasis: #eeeeee;
-
-$color-primary-bg-subtle: #e2eaf7;
-$color-secondary-bg-subtle: #f1f2f3;
-$color-success-bg-subtle: #dcf1e4;
-$color-info-bg-subtle: #e5f4f8;
-$color-warning-bg-subtle: #fbf1dd;
-$color-danger-bg-subtle: #fae4e8;
-$color-light-bg-subtle: #f5f5f5;
-$color-dark-bg-subtle: #262626;
-
-$color-primary-border-subtle: #b1c6ea;
-$color-secondary-border-subtle: #d9dbe0;
-$color-success-border-subtle: #a1dbb8;
-$color-info-border-subtle: #bbe1ed;
-$color-warning-border-subtle: #f4d9a4;
-$color-danger-border-subtle: #f1b7c1;
-$color-light-border-subtle: #eeeeee;
-$color-dark-border-subtle: #9e9e9e;
 
 $color-white-rgb: 255, 255, 255;
 $color-black-rgb: 0, 0, 0;

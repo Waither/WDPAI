@@ -83,23 +83,35 @@ function query(string $query, array $params = [], string $className = NULL): arr
             return $result;
         }
         
-        // Check if first query word is DQL Command
+        // Check if first query word is DQL CommandX
         elseif (in_array($queryType, $dqlCommands)) {
     
             // Get data
             $data = $db->getData($query, $params);
 
             // Map data to objects
-            // if ($className == 'Place') {
-            //     $data = array_map(
-            //         fn($row) => new Place($row['ID'], $row['name'], $row["type"], $row["company"], $row['description'], $row["address"], $row['latitude'], $row['longitude'], $row['rating'], $row['image']),
-            //         $data);
-            // }
-            // elseif ($className == 'Pin') {
-            //     $data = array_map(
-            //         fn($row) => new Pin($row['ID'], $row['name'], $row['location']),
-            //         $data);
-            // }
+            if ($className == 'Place') {
+                require_once 'Place.php';
+                $data = array_map(
+                    fn($row) => new Place(
+                        $row['ID_place'], 
+                        $row['name_place'], 
+                        $row["types"] ?? "", 
+                        $row["name_company"], 
+                        $row["address_place"], 
+                        $row['latitude_place'], 
+                        $row['longitude_place'], 
+                        $row['fcn__avg_rating'], 
+                        $row['image_place'] !== null ? 'data:image/jpeg;base64,' . base64_encode(stream_get_contents($row['image_place'])) : ""
+                    ),
+                    $data);
+            }
+            elseif ($className == 'Pin') {
+                require_once 'Pin.php';
+                $data = array_map(
+                    fn($row) => new Pin($row['ID'], $row['name'], $row['location']),
+                    $data);
+            }
     
             return $data;
         }
