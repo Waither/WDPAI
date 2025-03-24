@@ -1,20 +1,22 @@
 <?php
 
 class Place {
-    private int $id;
-    private string $name;
-    private string $type;
-    private string $company;
-    private string $address;
-    private float $latitude;
-    private float $longitude;
-    private float $rating;
-    private string $image;
+    public int $id;
+    public string $name;
+    public string $type;
+    public string $placeTags;
+    public string $company;
+    public string $address;
+    public float $latitude;
+    public float $longitude;
+    public float $rating;
+    public string $image;
 
-    public function __construct(int $id, string $name, string $type, string $company, string $address, float $latitude, float $longitude, float $rating, string $image) {
+    public function __construct(int $id, string $name, string $type, string $placeTags, string $company, string $address, float $latitude, float $longitude, float $rating, string $image) {
         $this->id = $id;
         $this->name = $name;
         $this->type = $type;
+        $this->placeTags = $placeTags;
         $this->company = $company;
         $this->address = $address;
         $this->latitude = $latitude;
@@ -33,6 +35,10 @@ class Place {
 
     public function getType(): string {
         return $this->type;
+    }
+
+    public function getPlaceTags(): string {
+        return $this->placeTags;
     }
 
     public function getCompany(): string {
@@ -60,7 +66,7 @@ class Place {
     }
 
     public function getRatingStars(): string {
-        $stars = "<span class='tooltiptext'>{$this->rating}</span>";
+        $stars = "<div class='cardStars mt-1 tooltip'><span class='tooltiptext'>{$this->rating}</span>";
         for ($i = 0; $i < 5; $i++) {
             if ($this->rating >= $i + 1) {
                 $stars .= "<i class='fas fa-star'></i>";
@@ -72,6 +78,7 @@ class Place {
                 $stars .= "<i class='far fa-star text-dark'></i>";
             }
         }
+        $stars .= "</div>";
         return $stars;
     }
 }

@@ -10,9 +10,7 @@
                 <h2 class="card-title mb-0"><?= $place->getName(); ?></h2>
                 <p class="mb-0"><?= $place->getCompany(); ?></p>
                 <p class="mb-0"><?= $place->getAddress(); ?></p>
-                <div class="cardStars d-flex mt-1 tooltip">
-                    <?= $place->getRatingStars(); ?>
-                </div>
+                <div><?= $place->getRatingStars(); ?></div>
             </div>
         </div>
         <div>

@@ -164,3 +164,17 @@ $justify-content-map: (
 .under-construction {
     flex: 1;
 }
+
+.fade {
+    transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade {
+        transition: none;
+    }
+}
+
+.fade:not(.show) {
+    opacity: 0;
+}

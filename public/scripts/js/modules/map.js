@@ -1,6 +1,7 @@
 "use strict";
 
 import * as MAP from './api.js';
+import * as ALERT from './alert.js';
 
 let map;
 let markers = [];
@@ -10,21 +11,23 @@ export async function initSite() {
 
     setTimeout(async () => {
         const formData = new FormData();
-        formData.append(":position", JSON.stringify({ lat: 52.210, lng: 20.982 }));
+        const position = JSON.stringify({ lat: 52.210, lng: 20.982 });
 
-        const response = await fetch("/public/scripts/php/getClosePins.php", { method: "POST", body: formData });
-        const data = await response.json();
+        fetch(`/public/scripts/php/getClosePins.php?position=${position}`, { method: "GET" })
+            .then((response) => response.json())
+            .then((data) => {
+                if (!data.success) {
+                    ALERT.show("error", data.message);
+                    return;
+                }
 
-        const markerPromises = JSON.parse(data).map(async (element) => {
-            const marker = await MAP.addMarker(map, { lat: parseFloat(element.latitude_place), lng: parseFloat(element.longitude_place) }, element.name);
-            return { id: element.ID_place, marker };
-        });
+                const markerPromises = data.data.map(async (element) => {
+                    const marker = await MAP.addMarker(map, { lat: parseFloat(element.location.lat), lng: parseFloat(element.location.lng) }, element.name);
+                    return { id: element.ID_place, marker };
+                });
 
-        markers = await Promise.all(markerPromises);
-
-        setTimeout(async () => {
-            markers = await MAP.clearMarkers(markers);
-        }, 5000);
+                markers = Promise.all(markerPromises);
+            });
     }, 1000);
 }
 

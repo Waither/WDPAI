@@ -96,7 +96,8 @@ function query(string $query, array $params = [], string $className = NULL): arr
                     fn($row) => new Place(
                         $row['ID_place'], 
                         $row['name_place'], 
-                        $row["types"] ?? "", 
+                        $row["types"] ?? "",
+                        $row["placeTags"] ?? "",
                         $row["name_company"], 
                         $row["address_place"], 
                         $row['latitude_place'], 
@@ -109,7 +110,7 @@ function query(string $query, array $params = [], string $className = NULL): arr
             elseif ($className == 'Pin') {
                 require_once 'Pin.php';
                 $data = array_map(
-                    fn($row) => new Pin($row['ID'], $row['name'], $row['location']),
+                    fn($row) => new Pin($row['ID_place'], $row['name_place'], ["lng" => $row['longitude_place'], "lat" => $row['latitude_place']]),
                     $data);
             }
     

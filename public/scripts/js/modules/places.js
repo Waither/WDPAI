@@ -1,6 +1,8 @@
 "use strict";
 
 import * as ALERT from "./alert.js";
+import * as functions from "./functions.js";
+import * as API from "./api.js";
 
 export async function initSite() {
     const container = document.querySelector(".container");
@@ -23,4 +25,59 @@ export async function initSite() {
     };
     
     setInitialHeight();
+
+    document.querySelectorAll(".cardPlace").forEach((element) => {
+        element.addEventListener("click", async (event) => {
+            const placeID = element.getAttribute("data-id");
+            
+            functions.showModal();
+
+            fetch(`/public/scripts/php/getPlace.php?placeID=${placeID}`, { method: "GET" })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (!data.success) {
+                        ALERT.show("error", data.message);
+                        return;
+                    }
+                    
+                    const modal = document.querySelector("#modalForm");
+
+                    const place = data.data;
+
+                    modal.querySelector("#modalID").innerHTML = place.ID_place;
+                    modal.querySelector("#modalName").innerHTML = place.name;
+                    modal.querySelector("#modalCompany").innerHTML = place.company;
+                    modal.querySelector("#modalAddress").innerHTML = place.address;
+                    modal.querySelector("#modalRating").innerHTML = place.rating;
+
+                    modal.querySelector("#modalImage").src = place.image;
+                    modal.querySelector("#modalImage").alt = place.name;
+
+
+                    // const placeTags = modal.querySelector("#placeTags");
+                    // placeTags.innerHTML = "";
+                    // place.placeTags.split(", ").forEach((tag) => {
+                    //     const tagElement = document.createElement("span");
+                    //     tagElement.className = "badge bg-primary me-1";
+                    //     tagElement.innerHTML = tag;
+                    //     placeTags.appendChild(tagElement);
+                    // });
+
+                    const position = { lat: parseFloat(place.latitude), lng: parseFloat(place.longitude) };
+                    API.initMap(position)
+                        .then((map) => {
+                            API.addMarker(map, position, place.name);
+                        });
+                })
+                .catch((error) => {
+                    ALERT.show("error", error.message);
+                });
+        });
+    });
+
+    document.querySelectorAll("[data-mdb-dismiss=modal").forEach((element) => {
+        element.addEventListener("click", () => {
+            functions.hideModal();
+        });
+    });
 }

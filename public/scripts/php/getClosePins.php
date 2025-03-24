@@ -3,7 +3,27 @@
 // Link database
 require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
 
-$query = 'SELECT "ID_place", "name_place", "longitude_place", "latitude_place" FROM tb_place;';
-$result = query($query, "Pin");
+$position = $_GET['position'];
+try {
+    $pins = query('SELECT "ID_place", "name_place", "longitude_place", "latitude_place" FROM tb_place;', [],"Pin");
 
-echo json_encode($result);
+    if (!is_array($pins)) {
+        throw new Exception($pins);
+    }
+
+    foreach ($pins as &$pin) {
+        $pin = (object)$pin;
+    }
+
+    echo json_encode([
+        "success" => true,
+        "data" => $pins
+    ]);
+}
+catch (Exception $e) {
+    echo json_encode([
+        "success" => false,
+        "message" => $e->getMessage()
+    ]);
+    exit();
+}

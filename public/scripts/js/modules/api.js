@@ -1,7 +1,7 @@
-export async function initMap() {
+export async function initMap(position = undefined) {
     const { Map } = await google.maps.importLibrary("maps");
 
-    const position = { lat: 52.210, lng: 20.982 };
+    position = position ?? { lat: 52.210, lng: 20.982 };
 
     const map = new Map(document.getElementById("map"), {
         zoom: 5,
