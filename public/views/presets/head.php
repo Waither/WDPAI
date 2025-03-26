@@ -20,4 +20,12 @@
 
     <!-- JavaScript -->
     <script src="/public/scripts/js/main.js" type="module"></script>
+
+    <?php
+        $user = null;
+        if (isset($_COOKIE['user'])) {
+            require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
+            $user = query('SELECT *, "truckstop"."fcn__getRoles"("ID_special") FROM tb_user WHERE "ID_special" = :ID', [ ":ID" => $_COOKIE['user'] ], "User")[0];
+        }
+    ?>
 </head>

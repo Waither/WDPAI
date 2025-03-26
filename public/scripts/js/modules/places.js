@@ -26,8 +26,8 @@ export async function initSite() {
     
     setInitialHeight();
 
-    document.querySelectorAll(".cardPlace").forEach((element) => {
-        element.addEventListener("click", async (event) => {
+    document.querySelectorAll(".card").forEach((element) => {
+        element.addEventListener("click", async (e) => {
             const placeID = element.getAttribute("data-id");
             
             functions.showModal();
@@ -53,18 +53,29 @@ export async function initSite() {
                     modal.querySelector("#modalImage").src = place.image;
                     modal.querySelector("#modalImage").alt = place.name;
 
+                    console.log(place);
 
-                    // const placeTags = modal.querySelector("#placeTags");
-                    // placeTags.innerHTML = "";
-                    // place.placeTags.split(", ").forEach((tag) => {
-                    //     const tagElement = document.createElement("span");
-                    //     tagElement.className = "badge bg-primary me-1";
-                    //     tagElement.innerHTML = tag;
-                    //     placeTags.appendChild(tagElement);
-                    // });
+
+                    const placeTags = modal.querySelector("#modalTags");
+                    placeTags.innerHTML = "";
+                    place.placeTags.forEach((tag) => {
+                        const tagElement = document.createElement("span");
+                        tagElement.className = "badge bg-primary me-1";
+                        tagElement.innerHTML = tag;
+                        placeTags.appendChild(tagElement);
+                    });
+
+                    const placeTypes = modal.querySelector("#modalTypes");
+                    placeTypes.innerHTML = "";
+                    place.type.forEach((type) => {
+                        const typeElement = document.createElement("span");
+                        typeElement.className = "badge bg-secondary me-1";
+                        typeElement.innerHTML = type;
+                        placeTypes.appendChild(typeElement);
+                    });
 
                     const position = { lat: parseFloat(place.latitude), lng: parseFloat(place.longitude) };
-                    API.initMap(position)
+                    API.initMap(position, 10)
                         .then((map) => {
                             API.addMarker(map, position, place.name);
                         });

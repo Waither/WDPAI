@@ -20,31 +20,28 @@
                 new Link("places", "fa-city", "/places"),
                 new Link("map", "fa-map-location-dot", "/map"),
                 new Link("favourite", "fa-star", "/favourite", true),
-                new Link("moderator", "fa-user-gear", "/moderator", true, ["admin", "moderator"]),
-                new Link("admin", "fa-user-shield", "/admin", true, ["admin"]),
+                new Link("moderator", "fa-user-gear", "/moderator", true, "moderator"),
+                new Link("admin", "fa-user-shield", "/admin", true, "admin"),
                 new Link("user", "fa-user", "/user", true),
                 new Link("login", "fa-right-to-bracket", "/login")
             ];
-
-            if (isset($_COOKIE['user'])) {
-                require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
-
-                $user = query('SELECT * FROM tb_user WHERE "ID_special" = :ID', [ ":ID" => $_COOKIE['user'] ]);
-            }
-
+            
             foreach ($links as $link) {
+                if ($link->name == "login" && isset($_COOKIE['user'])) {
+                    continue;
+                }
+
                 if ($link->logged && !isset($_COOKIE['user'])) {
                     continue;
                 }
-                if (count($link->roles) && isset($_COOKIE['user'])) {
-                    continue;
+
+                if ($link->role != "" && isset($_COOKIE['user'])) {
+                    if (!in_array($link->role, $user->roles)) {
+                        continue;
+                    }
                 }
 
-                if ($mobile && count($link->roles)) {
-                    continue;
-                }
-                
-                if (isset($_COOKIE['user']) && $link->name == "login") {
+                if ($mobile && ($link->role != "" || ($link->name == "favourite" && !isset($_COOKIE['user'])) || ($link->name == "user" && !isset($_COOKIE['user'])))) {
                     continue;
                 }
 

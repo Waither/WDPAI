@@ -97,13 +97,13 @@ function query(string $query, array $params = [], string $className = NULL): arr
                         $row['ID_place'], 
                         $row['name_place'], 
                         $row["types"] ?? "",
-                        $row["placeTags"] ?? "",
+                        $row["placetags"] ?? "",
                         $row["name_company"], 
                         $row["address_place"], 
                         $row['latitude_place'], 
                         $row['longitude_place'], 
                         $row['fcn__avg_rating'], 
-                        $row['image_place'] !== null ? 'data:image/jpeg;base64,' . base64_encode(stream_get_contents($row['image_place'])) : ""
+                        $row['image_place'] !== null ? 'data:image/jpeg;base64,'.base64_encode(stream_get_contents($row['image_place'])) : ""
                     ),
                     $data);
             }
@@ -111,6 +111,12 @@ function query(string $query, array $params = [], string $className = NULL): arr
                 require_once 'Pin.php';
                 $data = array_map(
                     fn($row) => new Pin($row['ID_place'], $row['name_place'], ["lng" => $row['longitude_place'], "lat" => $row['latitude_place']]),
+                    $data);
+            }
+            elseif ($className == 'User') {
+                require_once 'User.php';
+                $data = array_map(
+                    fn($row) => new User($row),
                     $data);
             }
     

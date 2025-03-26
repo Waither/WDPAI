@@ -15,9 +15,9 @@ $routes = [
     '/moderator' => 'moderator.php',
 ];
 
-$page = $routes[$request] ?? 'presets/errors/501.php';
+$page = $routes[$request] ?? 'presets/errors/404.php';
 if (!file_exists(__DIR__."{$viewDir}{$page}")) {
-    $page = 'presets/errors/404.php';
+    $page = 'presets/errors/501.php';
 }
 
 require __DIR__."{$viewDir}{$page}";

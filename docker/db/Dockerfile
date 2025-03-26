@@ -1,4 +1,4 @@
-FROM postgis/postgis:latest
+FROM postgres:latest
 
 ENV POSTGRES_PASSWORD docker
 ENV POSTGRES_DB db
