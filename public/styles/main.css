@@ -2737,6 +2737,10 @@ body:not([data-mobile]) > #main #loginForm {
 .badge.badge-dark i {
 	color: var(--color-dark-text-emphasis);
 }
+.badge:hover {
+	transform: scale(1.05);
+	transition: transform 0.3s ease-in-out;
+}
 
 .backdrop {
 	width: 100vw;
@@ -3429,7 +3433,7 @@ body[data-mobile="1"] .modal > .modal-xxl {
 	width: auto;
 }
 
-#placeLeft {
+body:not([data-mobile="1"]) #placeLeft, body:not([data-mobile="1"]) #userLeft {
 	border-right: solid 1px #eeeeee;
 }
 

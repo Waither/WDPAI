@@ -37,7 +37,6 @@ export async function initSite() {
             fetch(`/public/scripts/php/getUser.php?userID=${userID}`, { method: "GET" })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     const user = data.data
                     if (!data.success) {
                         ALERT.show("error", data.message);

@@ -213,6 +213,11 @@
             color: var(--color-dark-text-emphasis);
         }
     }
+
+    &:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+    }
 }
 
 .backdrop {
@@ -656,7 +661,6 @@
     }
 }
 
-
 .cardStars {
     color: var(--color-yellow);
 }
@@ -1030,6 +1034,6 @@
     }
 }
 
-#placeLeft {
+body:not([data-mobile="1"]) #placeLeft, body:not([data-mobile="1"]) #userLeft {
     border-right: solid $border-width $color-light-border-subtle;
 }
