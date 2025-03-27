@@ -14,5 +14,7 @@
             </div>
         </div>
     </div>
+
+    <?php $mobile ? include_once 'presets/mobileTop.php' : ""; ?>
 </body>
 </html>

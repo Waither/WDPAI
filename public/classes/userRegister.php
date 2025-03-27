@@ -13,7 +13,7 @@ class UserRegister {
 
     public function register(): void {
         try {
-            $user = (object)query('SELECT * FROM truckstop."fcn_registerUser_wrapper"(:name, :email, :password) AS uuid', [
+            $user = (object)query('SELECT * FROM "truckstop"."fcn__registerUser_wrapper"(:name, :email, :password) AS uuid', [
                 ":name" => $this->name,
                 ":email" => $this->email,
                 ":password" => $this->password

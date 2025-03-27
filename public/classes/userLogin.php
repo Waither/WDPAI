@@ -11,7 +11,7 @@ class UserLogin {
 
     public function login() {
         try {
-            $user = query('SELECT truckstop."fcn__loginUser"(:email, :password) AS uuid', [
+            $user = query('SELECT truckstop."fcn__loginUser"(:email, :password) AS "uuid"', [
                 ":email" => $this->email,
                 ":password" => $this->password
             ]);
