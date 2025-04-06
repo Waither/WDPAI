@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
 });
 
+// Fade out effect for links
 document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -59,5 +60,21 @@ document.querySelectorAll('a').forEach(link => {
         setTimeout(() => {
             window.location.href = targetHref;
         }, fadeOutDuration);
+
+        // Restore initial classes after navigation
+        setTimeout(() => {
+            main.classList.remove('fade-out-default');
+            main.classList.add('fade-in-default');
+
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.classList.remove('fade-out-down', 'fade-out-left', 'animation', 'animation-500ms');
+            }
+
+            const mobileTop = document.getElementById("mobileTop");
+            if (mobileTop) {
+                mobileTop.classList.remove('fade-out-up', 'animation', 'animation-500ms');
+            }
+        }, fadeOutDuration + 100);
     });
 });
