@@ -11,10 +11,10 @@
     ?>
 
     <div id="main" class="animation fade-in-default animation-500ms">
-        <div class="h-100 d-flex p-4 rounded-5 shadow <?= $mobile ? "flex-column" : ""; ?>">
-            <div id="placeLeft" class="col-md-4 d-flex flex-column">
+        <div class="h-100 d-flex p-4 rounded-5 shadow flex-wrap <?= $mobile ? "flex-column" : ""; ?>">
+            <div id="placeLeft" class="col-12 col-md-4 d-flex flex-column <?= $mobile ? "h-max-content" : ""; ?>">
                 <div class="d-flex flex-column">
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center <?= $mobile ? "d-none" : ""; ?>">
                         <img id="modalImage" class="img-fluid rounded" src="" alt="User Image">
                     </div>
                     <h4>Name: <span class="fw-normal"><?= $user->name; ?></span></h4>
@@ -25,7 +25,7 @@
                     <div id="modalRating"></div>
                 </div>
 
-                <div class="d-flex flex-column mt-auto <?= !$mobile ? "me-3" : ""; ?>">
+                <div class="d-flex flex-column <?= !$mobile ? "me-3 mt-auto" : ""; ?>">
                     <?php
                         if ($mobile) {
                             $roles = $user->getRoles();
@@ -58,15 +58,15 @@
                 </div>
             </div>
 
-            <div id="placeComments" class="col-md-8 <?= $mobile ? "mt-3" : ""; ?>">
-                <div class="container">
+            <div id="placeComments" class="col-12 col-md-8 d-flex container-flex-1 <?= $mobile ? "mt-3" : ""; ?>">
+                <div class="container d-flex flex-column">
                     <div class="row">
                         <div class="col-12">
                             <h2 class="text-center">Last comments</h2>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12 d-flex flex-column">
+                    <div class="row d-flex container-flex-1">
+                        <div class="col-12 d-flex flex-column scroll-box">
                             <?php
                                 foreach ($comments as $comment) {
                                     include 'presets/comment.php';

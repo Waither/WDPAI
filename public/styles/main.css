@@ -2620,6 +2620,9 @@ textarea.form-control-lg {
 	align-items: center;
 	background-color: #fff;
 }
+#mobileTop a {
+	height: 80px;
+}
 #mobileTop img {
 	width: 80px;
 }
@@ -4243,6 +4246,44 @@ body:not([data-mobile="1"]) #placeLeft, body:not([data-mobile="1"]) #userLeft {
 
 .h-100 {
 	height: 100% !important;
+}
+
+.w-auto {
+	width: auto !important;
+}
+
+.h-auto {
+	height: auto !important;
+}
+
+.w-max-content {
+	width: -moz-max-content !important;
+	width: max-content !important;
+}
+
+.h-max-content {
+	height: -moz-max-content !important;
+	height: max-content !important;
+}
+
+.w-min-content {
+	width: -moz-min-content !important;
+	width: min-content !important;
+}
+
+.h-min-content {
+	height: -moz-min-content !important;
+	height: min-content !important;
+}
+
+.w-fit-content {
+	width: -moz-fit-content !important;
+	width: fit-content !important;
+}
+
+.h-fit-content {
+	height: -moz-fit-content !important;
+	height: fit-content !important;
 }
 
 .under-construction {

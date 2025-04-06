@@ -18,5 +18,17 @@ export async function initSite() {
             })
     });
 
+    const container = document.querySelector(".scroll-box");
+
+    window.addEventListener("resize", () => {
+        setInitialHeight();
+    });
     
+    function setInitialHeight() {
+        const parentElement = container.parentElement;
+        console.log(parentElement.offsetHeight);
+        document.querySelector(".scroll-box").style.height = parentElement.offsetHeight + "px";
+    };
+    
+    setInitialHeight();
 }

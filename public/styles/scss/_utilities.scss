@@ -161,6 +161,15 @@ $justify-content-map: (
     }
 }
 
+@each $i in "auto", "max-content", "min-content", "fit-content" {
+    .w-#{$i} {
+        width: #{$i} !important;
+    }
+    .h-#{$i} {
+        height: #{$i} !important;
+    }
+}
+
 .under-construction {
     flex: 1;
 }

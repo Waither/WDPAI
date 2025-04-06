@@ -1,3 +1,3 @@
 <div id="mobileTop" class="shadow">
-    <img src="/public/img/logo.png" alt="">
+    <a href="/"><img src="/public/img/logo.png" alt=""></a>
 </div>
