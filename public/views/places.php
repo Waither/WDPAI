@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <?php include 'presets/head.php'; ?>
-<?php $mobile = preg_match('/Mobile|Android|iPhone|iPad/', $_SERVER['HTTP_USER_AGENT']) ? true : false; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <?php require_once 'presets/sidebar.php'; ?>
 
@@ -46,7 +45,7 @@
                     <div id="placeLeft" class="col-md-4">
                         <div class="d-flex flex-column">
                             <div class="d-flex justify-content-center">
-                                <img id="modalImage" class="img-fluid rounded" src="" alt="">
+                                <img id="modalImage" class="img-fluid rounded" src="" alt="Place Image">
                             </div>
                             <h4>Name: <span id="modalName" class="fw-normal"></span></h4>
                             <h4>Company: <span id="modalCompany" class="fw-normal"></span></h4>

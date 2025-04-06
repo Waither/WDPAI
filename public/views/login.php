@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <?php include 'presets/head.php'; ?>
-<?php $mobile = preg_match('/Mobile|Android|iPhone|iPad/', $_SERVER['HTTP_USER_AGENT']) ? true : false; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <div id="main" class="d-flex flex-column justify-content-center animation fade-in-default animation-500ms">
         <div id="loginForm" class="container d-flex flex-column rounded-5 shadow pt-3 pb-5"> 

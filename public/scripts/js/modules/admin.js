@@ -37,11 +37,12 @@ export async function initSite() {
             fetch(`/public/scripts/php/getUser.php?userID=${userID}`, { method: "GET" })
                 .then((response) => response.json())
                 .then((data) => {
-                    const user = data.data
                     if (!data.success) {
                         ALERT.show("error", data.message);
                         return;
                     }
+                    
+                    const user = data.data
 
                     ID_user = user.ID_user;
                     ID_special = user.ID_special;
@@ -56,6 +57,8 @@ export async function initSite() {
                     document.querySelectorAll(".rolesCheckbox").forEach((checkbox) => {
                         checkbox.checked = user.roles.includes(checkbox.getAttribute("data-name"));
                     });
+
+                    modal.querySelector(".modal-footer").classList.toggle("d-none", user.ID_special === userIdSpecial);
                 })
                 .catch((error) => {
                     ALERT.show("error", error.message);

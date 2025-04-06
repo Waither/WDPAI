@@ -10,7 +10,6 @@
         echo "<input type='hidden' id='adminID' value='{$user->ID_special}'>";
     }
 ?>
-<?php $mobile = preg_match('/Mobile|Android|iPhone|iPad/', $_SERVER['HTTP_USER_AGENT']) ? true : false; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <?php require_once 'presets/sidebar.php'; ?>
 
@@ -28,7 +27,7 @@
                     <div class="col-12">
                         <section class="scroll-box">
                             <?php
-                                $users = query('SELECT *, "truckstop"."fcn__getRoles"("ID_special")  FROM "tb_user" NATURAL INNER JOIN "tb_login";', [], "User");
+                                $users = query('SELECT * FROM vw_user;', [], "User");
                                 foreach ($users as $user) {
                                     include 'presets/user.php';
                                 }

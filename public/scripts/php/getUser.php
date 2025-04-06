@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
 
 $userID = $_GET['userID'];
 try {
-    $user = query('SELECT *, "truckstop"."fcn__getRoles"("ID_special") FROM "truckstop"."tb_user" NATURAL INNER JOIN "truckstop"."tb_login" WHERE "ID_special" = :userID;', [':userID' => $userID], "User");
+    $user = query('SELECT * FROM vw_user WHERE "ID_special" = :userID;', [':userID' => $userID], "User");
 
     if (!is_array($user)) {
         throw new Exception($user);

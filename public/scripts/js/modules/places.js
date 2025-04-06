@@ -41,7 +41,6 @@ export async function initSite() {
                     }
                     
                     const modal = document.querySelector("#modalForm");
-
                     const place = data.data;
 
                     modal.querySelector("#modalID").innerHTML = place.ID_place;
@@ -51,10 +50,6 @@ export async function initSite() {
                     modal.querySelector("#modalRating").innerHTML = place.rating;
 
                     modal.querySelector("#modalImage").src = place.image;
-                    modal.querySelector("#modalImage").alt = place.name;
-
-                    console.log(place);
-
 
                     const placeTags = modal.querySelector("#modalTags");
                     placeTags.innerHTML = "";

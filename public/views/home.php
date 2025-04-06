@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <?php require_once 'presets/head.php'; ?>
-<?php $mobile = preg_match('/Mobile|Android|iPhone|iPad/', $_SERVER['HTTP_USER_AGENT']) ? true : false; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <?php require_once 'presets/sidebar.php'; ?>
 

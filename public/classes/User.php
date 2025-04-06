@@ -4,17 +4,19 @@ class User
 {
     public int $ID_user;
     public string $name;
-    public ?int $ID_company;
+    public ?string $company;
+    public ?string $nationality;
     public string $ID_special;
-    public array $roles = [];
+    public array $roles;
     public string $email;
 
     public function __construct(array $data) {
         $this->ID_user = $data['ID_user'];
         $this->name = $data['name'];
-        $this->ID_company = $data['ID_company'] ?? null;
+        $this->company = $data['company'] ?? null;
+        $this->nationality = $data['nationality'] ?? null;
         $this->ID_special = $data['ID_special'];
-        $this->roles = $this->parseRoles($data['fcn__getRoles'] ?? '');
+        $this->roles = $this->parseRoles($data['roles'] ?? '');
         if (isset($data['email'])) {
             $this->email = $data['email'];
         }

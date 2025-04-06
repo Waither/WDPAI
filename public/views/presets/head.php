@@ -25,7 +25,15 @@
         $user = null;
         if (isset($_COOKIE['user'])) {
             require_once $_SERVER['DOCUMENT_ROOT'].'/public/classes/DBconnect.php';
-            $user = query('SELECT *, "truckstop"."fcn__getRoles"("ID_special") FROM tb_user WHERE "ID_special" = :ID', [ ":ID" => $_COOKIE['user'] ], "User")[0];
+            $user = query('SELECT * FROM truckstop.vw_user WHERE "ID_special" = :ID', [ ":ID" => $_COOKIE['user'] ], "User")[0];
+
+            ?>
+            <script>
+                const userIdSpecial = <?= json_encode($user->ID_special) ?>;
+            </script>
+            <?php
         }
+
+        $mobile = preg_match('/Mobile|Android|iPhone|iPad/', $_SERVER['HTTP_USER_AGENT']) ? true : false;
     ?>
 </head>

@@ -119,6 +119,12 @@ function query(string $query, array $params = [], string $className = NULL): arr
                     fn($row) => new User($row),
                     $data);
             }
+            elseif ($className == 'Comment') {
+                require_once 'Comment.php';
+                $data = array_map(
+                    fn($row) => new Comment($row),
+                    $data);
+            }
     
             return $data;
         }
