@@ -1,23 +1,10 @@
 <?php
 
-$request = $_SERVER['REQUEST_URI'];
-$viewDir = '/public/views/';
+require_once __DIR__.'/Router.php';
+require_once __DIR__.'/Application.php';
 
-$routes = [
-    '/' => 'home.php',
-    '/places' => 'places.php',
-    '/map' => 'map.php',
-    '/favourite' => 'favourite.php',
-    '/login' => 'login.php',
-    '/register' => 'register.php',
-    '/user' => 'user.php',
-    '/admin' => 'admin.php',
-    '/moderator' => 'moderator.php',
-];
 
-$page = $routes[$request] ?? 'presets/errors/404.php';
-if (!file_exists(__DIR__."{$viewDir}{$page}")) {
-    $page = 'presets/errors/501.php';
-}
 
-require __DIR__."{$viewDir}{$page}";
+$router = new Router($_SERVER['REQUEST_URI'], '/public/views/');
+$app = new Application($router);
+$app->run();
