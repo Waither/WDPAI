@@ -145,7 +145,9 @@ export async function initSite() {
                 
                 ALERT.show("success", data.message);
 
-                document.querySelector(`.card[data-id="${ID_user}"]`).remove();
+                document.querySelector(`.card[data-id="${ID_special}"]`).remove();
+
+                functions.hideModal();
             })
             .catch((error) => {
                 ALERT.show("error", error.message);
