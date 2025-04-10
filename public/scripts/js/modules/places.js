@@ -86,4 +86,20 @@ export async function initSite() {
             functions.hideModal();
         });
     });
+
+    document.getElementById("seachBar").addEventListener("input", (e) => {
+        const value = e.target.value.toLowerCase();
+    
+        document.querySelectorAll(".card").forEach((element) => {
+            let matches = false;
+
+            element.querySelectorAll("h2, p").forEach((child) => {
+                if (child.innerHTML.toLowerCase().includes(value)) {
+                    matches = true;
+                }
+            });
+
+            element.style.display = (matches || value === "") ? "" : "none";
+        });
+    });
 }

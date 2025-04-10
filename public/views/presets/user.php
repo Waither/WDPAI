@@ -1,4 +1,4 @@
-<div class="card cardPlace" data-id="<?= $user->ID_special; ?>" data-name="<?= $user->name; ?>" data-email="<?= $user->email; ?>" data-roles="<?= implode(',', $user->roles); ?>">
+<div class="card cardPlace" data-id="<?= $user->ID_special; ?>">
     <div class="card-body d-flex p-0">
         <div class="d-flex w-100 p-3">
             <div class="d-flex flex-column justify-content-center">

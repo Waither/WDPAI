@@ -78,12 +78,9 @@ export async function initSite() {
         document.querySelectorAll(".card").forEach((element) => {
             let matches = false;
     
-            Array.from(element.attributes).forEach(attr => {
-                if (attr.name.startsWith("data-")) {
-                    const attrValue = attr.value.toLowerCase();
-                    if (attrValue.includes(value)) {
-                        matches = true;
-                    }
+            element.querySelectorAll("h2, p").forEach((child) => {
+                if (child.innerHTML.toLowerCase().split(":")[1].includes(value)) {
+                    matches = true;
                 }
             });
     
