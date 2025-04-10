@@ -5,13 +5,13 @@
 -- Dumped from database version 17.4 (Debian 17.4-1.pgdg120+2)
 -- Dumped by pg_dump version 17.4
 
--- Started on 2025-04-10 17:19:08 UTC
+-- Started on 2025-04-10 23:00:48 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET transaction_timeout = 0;
-SET client_encoding = 'SQL_ASCII';
+SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
@@ -30,7 +30,7 @@ CREATE SCHEMA truckstop;
 ALTER SCHEMA truckstop OWNER TO docker;
 
 --
--- TOC entry 240 (class 1255 OID 16515)
+-- TOC entry 242 (class 1255 OID 16386)
 -- Name: fcn__avg_rating(integer); Type: FUNCTION; Schema: truckstop; Owner: docker
 --
 
@@ -54,7 +54,7 @@ $$;
 ALTER FUNCTION truckstop.fcn__avg_rating(p_place integer) OWNER TO docker;
 
 --
--- TOC entry 241 (class 1255 OID 16516)
+-- TOC entry 243 (class 1255 OID 16387)
 -- Name: fcn__getCommentByPlace(integer); Type: FUNCTION; Schema: truckstop; Owner: docker
 --
 
@@ -82,7 +82,7 @@ $$;
 ALTER FUNCTION truckstop."fcn__getCommentByPlace"(p_place integer) OWNER TO docker;
 
 --
--- TOC entry 244 (class 1255 OID 16536)
+-- TOC entry 244 (class 1255 OID 16388)
 -- Name: fcn__getRoles(uuid); Type: FUNCTION; Schema: truckstop; Owner: docker
 --
 
@@ -107,7 +107,39 @@ $$;
 ALTER FUNCTION truckstop."fcn__getRoles"(p_special_id uuid) OWNER TO docker;
 
 --
--- TOC entry 242 (class 1255 OID 16517)
+-- TOC entry 247 (class 1255 OID 16567)
+-- Name: fcn__log(); Type: FUNCTION; Schema: truckstop; Owner: docker
+--
+
+CREATE FUNCTION truckstop.fcn__log() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF (TG_OP = 'INSERT') THEN
+        INSERT INTO truckstop.tb_log (operation, new_data)
+        VALUES ('INSERT', to_jsonb(NEW));
+        RETURN NEW;
+
+    ELSIF (TG_OP = 'UPDATE') THEN
+        INSERT INTO truckstop.tb_log (operation, old_data, new_data)
+        VALUES ('UPDATE', to_jsonb(OLD), to_jsonb(NEW));
+        RETURN NEW;
+
+    ELSIF (TG_OP = 'DELETE') THEN
+        INSERT INTO truckstop.tb_log (operation, old_data)
+        VALUES ('DELETE', to_jsonb(OLD));
+        RETURN OLD;
+    END IF;
+
+    RETURN NULL;
+END;
+$$;
+
+
+ALTER FUNCTION truckstop.fcn__log() OWNER TO docker;
+
+--
+-- TOC entry 245 (class 1255 OID 16389)
 -- Name: fcn__loginUser(character varying, character varying); Type: FUNCTION; Schema: truckstop; Owner: docker
 --
 
@@ -141,7 +173,7 @@ $$;
 ALTER FUNCTION truckstop."fcn__loginUser"(p_email character varying, p_password character varying) OWNER TO docker;
 
 --
--- TOC entry 243 (class 1255 OID 16518)
+-- TOC entry 246 (class 1255 OID 16390)
 -- Name: fcn__registerUser_wrapper(character varying, character varying, character varying); Type: FUNCTION; Schema: truckstop; Owner: docker
 --
 
@@ -165,7 +197,7 @@ $$;
 ALTER FUNCTION truckstop."fcn__registerUser_wrapper"(p_name character varying, p_email character varying, p_password character varying) OWNER TO docker;
 
 --
--- TOC entry 256 (class 1255 OID 16519)
+-- TOC entry 259 (class 1255 OID 16391)
 -- Name: prc__registerUser(character varying, character varying, character varying); Type: PROCEDURE; Schema: truckstop; Owner: docker
 --
 
@@ -219,7 +251,7 @@ $$;
 ALTER PROCEDURE truckstop."prc__registerUser"(IN p_name character varying, IN p_email character varying, IN p_password character varying, OUT p_user_uuid uuid) OWNER TO docker;
 
 --
--- TOC entry 257 (class 1255 OID 16545)
+-- TOC entry 260 (class 1255 OID 16392)
 -- Name: prc__updateUserRoles(integer, json); Type: PROCEDURE; Schema: truckstop; Owner: docker
 --
 
@@ -250,7 +282,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 218 (class 1259 OID 16386)
+-- TOC entry 218 (class 1259 OID 16393)
 -- Name: rel_place_additional; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -263,7 +295,7 @@ CREATE TABLE truckstop.rel_place_additional (
 ALTER TABLE truckstop.rel_place_additional OWNER TO docker;
 
 --
--- TOC entry 219 (class 1259 OID 16391)
+-- TOC entry 219 (class 1259 OID 16396)
 -- Name: rel_place_type; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -276,7 +308,7 @@ CREATE TABLE truckstop.rel_place_type (
 ALTER TABLE truckstop.rel_place_type OWNER TO docker;
 
 --
--- TOC entry 220 (class 1259 OID 16396)
+-- TOC entry 220 (class 1259 OID 16399)
 -- Name: rel_user_role; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -289,7 +321,7 @@ CREATE TABLE truckstop.rel_user_role (
 ALTER TABLE truckstop.rel_user_role OWNER TO docker;
 
 --
--- TOC entry 222 (class 1259 OID 16402)
+-- TOC entry 221 (class 1259 OID 16402)
 -- Name: tb_additional; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -302,7 +334,7 @@ CREATE TABLE truckstop.tb_additional (
 ALTER TABLE truckstop.tb_additional OWNER TO docker;
 
 --
--- TOC entry 221 (class 1259 OID 16401)
+-- TOC entry 222 (class 1259 OID 16405)
 -- Name: tb_additional_ID_additional_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -317,7 +349,7 @@ ALTER TABLE truckstop.tb_additional ALTER COLUMN "ID_additional" ADD GENERATED A
 
 
 --
--- TOC entry 224 (class 1259 OID 16409)
+-- TOC entry 223 (class 1259 OID 16406)
 -- Name: tb_comment; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -335,7 +367,7 @@ CREATE TABLE truckstop.tb_comment (
 ALTER TABLE truckstop.tb_comment OWNER TO docker;
 
 --
--- TOC entry 223 (class 1259 OID 16408)
+-- TOC entry 224 (class 1259 OID 16413)
 -- Name: tb_comment_ID_comment_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -350,7 +382,7 @@ ALTER TABLE truckstop.tb_comment ALTER COLUMN "ID_comment" ADD GENERATED ALWAYS 
 
 
 --
--- TOC entry 226 (class 1259 OID 16420)
+-- TOC entry 225 (class 1259 OID 16414)
 -- Name: tb_company; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -363,7 +395,7 @@ CREATE TABLE truckstop.tb_company (
 ALTER TABLE truckstop.tb_company OWNER TO docker;
 
 --
--- TOC entry 225 (class 1259 OID 16419)
+-- TOC entry 226 (class 1259 OID 16417)
 -- Name: tb_company_ID_company_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -378,7 +410,48 @@ ALTER TABLE truckstop.tb_company ALTER COLUMN "ID_company" ADD GENERATED ALWAYS 
 
 
 --
--- TOC entry 227 (class 1259 OID 16426)
+-- TOC entry 241 (class 1259 OID 16558)
+-- Name: tb_log; Type: TABLE; Schema: truckstop; Owner: docker
+--
+
+CREATE TABLE truckstop.tb_log (
+    id integer NOT NULL,
+    operation character varying(10) NOT NULL,
+    changed_at timestamp without time zone DEFAULT now() NOT NULL,
+    old_data jsonb,
+    new_data jsonb
+);
+
+
+ALTER TABLE truckstop.tb_log OWNER TO docker;
+
+--
+-- TOC entry 240 (class 1259 OID 16557)
+-- Name: tb_log_id_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
+--
+
+CREATE SEQUENCE truckstop.tb_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE truckstop.tb_log_id_seq OWNER TO docker;
+
+--
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: tb_log_id_seq; Type: SEQUENCE OWNED BY; Schema: truckstop; Owner: docker
+--
+
+ALTER SEQUENCE truckstop.tb_log_id_seq OWNED BY truckstop.tb_log.id;
+
+
+--
+-- TOC entry 227 (class 1259 OID 16418)
 -- Name: tb_login; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -392,7 +465,7 @@ CREATE TABLE truckstop.tb_login (
 ALTER TABLE truckstop.tb_login OWNER TO docker;
 
 --
--- TOC entry 237 (class 1259 OID 16546)
+-- TOC entry 228 (class 1259 OID 16423)
 -- Name: tb_nationality; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -405,7 +478,7 @@ CREATE TABLE truckstop.tb_nationality (
 ALTER TABLE truckstop.tb_nationality OWNER TO docker;
 
 --
--- TOC entry 229 (class 1259 OID 16436)
+-- TOC entry 229 (class 1259 OID 16426)
 -- Name: tb_place; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -423,7 +496,7 @@ CREATE TABLE truckstop.tb_place (
 ALTER TABLE truckstop.tb_place OWNER TO docker;
 
 --
--- TOC entry 228 (class 1259 OID 16435)
+-- TOC entry 230 (class 1259 OID 16431)
 -- Name: tb_place_ID_place_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -438,7 +511,7 @@ ALTER TABLE truckstop.tb_place ALTER COLUMN "ID_place" ADD GENERATED ALWAYS AS I
 
 
 --
--- TOC entry 231 (class 1259 OID 16445)
+-- TOC entry 231 (class 1259 OID 16432)
 -- Name: tb_role; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -451,7 +524,7 @@ CREATE TABLE truckstop.tb_role (
 ALTER TABLE truckstop.tb_role OWNER TO docker;
 
 --
--- TOC entry 230 (class 1259 OID 16444)
+-- TOC entry 232 (class 1259 OID 16435)
 -- Name: tb_role_ID_role_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -466,7 +539,7 @@ ALTER TABLE truckstop.tb_role ALTER COLUMN "ID_role" ADD GENERATED ALWAYS AS IDE
 
 
 --
--- TOC entry 233 (class 1259 OID 16452)
+-- TOC entry 233 (class 1259 OID 16436)
 -- Name: tb_type; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -479,7 +552,7 @@ CREATE TABLE truckstop.tb_type (
 ALTER TABLE truckstop.tb_type OWNER TO docker;
 
 --
--- TOC entry 232 (class 1259 OID 16451)
+-- TOC entry 234 (class 1259 OID 16439)
 -- Name: tb_type_ID_type_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -494,7 +567,7 @@ ALTER TABLE truckstop.tb_type ALTER COLUMN "ID_type" ADD GENERATED ALWAYS AS IDE
 
 
 --
--- TOC entry 235 (class 1259 OID 16459)
+-- TOC entry 235 (class 1259 OID 16440)
 -- Name: tb_user; Type: TABLE; Schema: truckstop; Owner: docker
 --
 
@@ -510,7 +583,7 @@ CREATE TABLE truckstop.tb_user (
 ALTER TABLE truckstop.tb_user OWNER TO docker;
 
 --
--- TOC entry 234 (class 1259 OID 16458)
+-- TOC entry 236 (class 1259 OID 16444)
 -- Name: tb_user_ID_user_seq; Type: SEQUENCE; Schema: truckstop; Owner: docker
 --
 
@@ -525,7 +598,7 @@ ALTER TABLE truckstop.tb_user ALTER COLUMN "ID_user" ADD GENERATED ALWAYS AS IDE
 
 
 --
--- TOC entry 239 (class 1259 OID 16555)
+-- TOC entry 237 (class 1259 OID 16445)
 -- Name: vw_comment; Type: VIEW; Schema: truckstop; Owner: docker
 --
 
@@ -548,7 +621,7 @@ CREATE VIEW truckstop.vw_comment AS
 ALTER VIEW truckstop.vw_comment OWNER TO docker;
 
 --
--- TOC entry 236 (class 1259 OID 16537)
+-- TOC entry 238 (class 1259 OID 16450)
 -- Name: vw_place; Type: VIEW; Schema: truckstop; Owner: docker
 --
 
@@ -585,7 +658,7 @@ CREATE VIEW truckstop.vw_place AS
 ALTER VIEW truckstop.vw_place OWNER TO docker;
 
 --
--- TOC entry 238 (class 1259 OID 16551)
+-- TOC entry 239 (class 1259 OID 16455)
 -- Name: vw_user; Type: VIEW; Schema: truckstop; Owner: docker
 --
 
@@ -606,7 +679,15 @@ CREATE VIEW truckstop.vw_user AS
 ALTER VIEW truckstop.vw_user OWNER TO docker;
 
 --
--- TOC entry 3477 (class 0 OID 16386)
+-- TOC entry 3289 (class 2604 OID 16561)
+-- Name: tb_log id; Type: DEFAULT; Schema: truckstop; Owner: docker
+--
+
+ALTER TABLE ONLY truckstop.tb_log ALTER COLUMN id SET DEFAULT nextval('truckstop.tb_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 3488 (class 0 OID 16393)
 -- Dependencies: 218
 -- Data for Name: rel_place_additional; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -624,7 +705,7 @@ INSERT INTO truckstop.rel_place_additional VALUES (2, 1);
 
 
 --
--- TOC entry 3478 (class 0 OID 16391)
+-- TOC entry 3489 (class 0 OID 16396)
 -- Dependencies: 219
 -- Data for Name: rel_place_type; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -636,7 +717,7 @@ INSERT INTO truckstop.rel_place_type VALUES (2, 11);
 
 
 --
--- TOC entry 3479 (class 0 OID 16396)
+-- TOC entry 3490 (class 0 OID 16399)
 -- Dependencies: 220
 -- Data for Name: rel_user_role; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -647,8 +728,8 @@ INSERT INTO truckstop.rel_user_role VALUES (41, 2);
 
 
 --
--- TOC entry 3481 (class 0 OID 16402)
--- Dependencies: 222
+-- TOC entry 3491 (class 0 OID 16402)
+-- Dependencies: 221
 -- Data for Name: tb_additional; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
 
@@ -667,8 +748,8 @@ INSERT INTO truckstop.tb_additional OVERRIDING SYSTEM VALUE VALUES (12, 'Repair'
 
 
 --
--- TOC entry 3483 (class 0 OID 16409)
--- Dependencies: 224
+-- TOC entry 3493 (class 0 OID 16406)
+-- Dependencies: 223
 -- Data for Name: tb_comment; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
 
@@ -679,8 +760,8 @@ INSERT INTO truckstop.tb_comment OVERRIDING SYSTEM VALUE VALUES (3, 41, 2, '2025
 
 
 --
--- TOC entry 3485 (class 0 OID 16420)
--- Dependencies: 226
+-- TOC entry 3495 (class 0 OID 16414)
+-- Dependencies: 225
 -- Data for Name: tb_company; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
 
@@ -690,7 +771,17 @@ INSERT INTO truckstop.tb_company OVERRIDING SYSTEM VALUE VALUES (11, 'TransMar')
 
 
 --
--- TOC entry 3486 (class 0 OID 16426)
+-- TOC entry 3508 (class 0 OID 16558)
+-- Dependencies: 241
+-- Data for Name: tb_log; Type: TABLE DATA; Schema: truckstop; Owner: docker
+--
+
+INSERT INTO truckstop.tb_log VALUES (1, 'DELETE', '2025-04-10 22:55:40.195804', '{"name": "admin1", "ID_user": 101, "ID_company": null, "ID_special": "dadeedd4-5379-440a-b99b-480f50415e2e", "ID_nationality": null}', NULL);
+INSERT INTO truckstop.tb_log VALUES (2, 'UPDATE', '2025-04-10 22:56:07.685125', '{"name": "user2", "ID_user": 81, "ID_company": null, "ID_special": "49c4f8ff-e663-49f5-8737-108f0b2d4ba6", "ID_nationality": null}', '{"name": "user232", "ID_user": 81, "ID_company": null, "ID_special": "49c4f8ff-e663-49f5-8737-108f0b2d4ba6", "ID_nationality": null}');
+
+
+--
+-- TOC entry 3497 (class 0 OID 16418)
 -- Dependencies: 227
 -- Data for Name: tb_login; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -702,8 +793,8 @@ INSERT INTO truckstop.tb_login VALUES (81, 'user2@mail', '7e58d63b60197ceb55a1c4
 
 
 --
--- TOC entry 3495 (class 0 OID 16546)
--- Dependencies: 237
+-- TOC entry 3498 (class 0 OID 16423)
+-- Dependencies: 228
 -- Data for Name: tb_nationality; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
 
@@ -712,7 +803,7 @@ INSERT INTO truckstop.tb_nationality VALUES (2, 'Germany');
 
 
 --
--- TOC entry 3488 (class 0 OID 16436)
+-- TOC entry 3499 (class 0 OID 16426)
 -- Dependencies: 229
 -- Data for Name: tb_place; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -722,7 +813,7 @@ INSERT INTO truckstop.tb_place OVERRIDING SYSTEM VALUE VALUES (2, 2, 'Stacja Orl
 
 
 --
--- TOC entry 3490 (class 0 OID 16445)
+-- TOC entry 3501 (class 0 OID 16432)
 -- Dependencies: 231
 -- Data for Name: tb_role; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -732,7 +823,7 @@ INSERT INTO truckstop.tb_role OVERRIDING SYSTEM VALUE VALUES (2, 'admin');
 
 
 --
--- TOC entry 3492 (class 0 OID 16452)
+-- TOC entry 3503 (class 0 OID 16436)
 -- Dependencies: 233
 -- Data for Name: tb_type; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
@@ -749,20 +840,20 @@ INSERT INTO truckstop.tb_type OVERRIDING SYSTEM VALUE VALUES (11, 'Restaurant');
 
 
 --
--- TOC entry 3494 (class 0 OID 16459)
+-- TOC entry 3505 (class 0 OID 16440)
 -- Dependencies: 235
 -- Data for Name: tb_user; Type: TABLE DATA; Schema: truckstop; Owner: docker
 --
 
 INSERT INTO truckstop.tb_user OVERRIDING SYSTEM VALUE VALUES (71, 'moderator', NULL, 'e774623c-36d3-435c-9f19-8a13fb5564a7', NULL);
-INSERT INTO truckstop.tb_user OVERRIDING SYSTEM VALUE VALUES (81, 'user2', NULL, '49c4f8ff-e663-49f5-8737-108f0b2d4ba6', NULL);
 INSERT INTO truckstop.tb_user OVERRIDING SYSTEM VALUE VALUES (41, 'admin', NULL, '7653d93e-100b-4d99-9880-935e96e7c1fa', 1);
 INSERT INTO truckstop.tb_user OVERRIDING SYSTEM VALUE VALUES (61, 'user', 11, '9a4d2c10-ac75-4f77-af94-487165dc7703', 2);
+INSERT INTO truckstop.tb_user OVERRIDING SYSTEM VALUE VALUES (81, 'user232', NULL, '49c4f8ff-e663-49f5-8737-108f0b2d4ba6', NULL);
 
 
 --
--- TOC entry 3501 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3515 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: tb_additional_ID_additional_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
@@ -770,8 +861,8 @@ SELECT pg_catalog.setval('truckstop."tb_additional_ID_additional_seq"', 20, true
 
 
 --
--- TOC entry 3502 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 3516 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: tb_comment_ID_comment_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
@@ -779,8 +870,8 @@ SELECT pg_catalog.setval('truckstop."tb_comment_ID_comment_seq"', 10, true);
 
 
 --
--- TOC entry 3503 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 3517 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: tb_company_ID_company_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
@@ -788,8 +879,17 @@ SELECT pg_catalog.setval('truckstop."tb_company_ID_company_seq"', 20, true);
 
 
 --
--- TOC entry 3504 (class 0 OID 0)
--- Dependencies: 228
+-- TOC entry 3518 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: tb_log_id_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
+--
+
+SELECT pg_catalog.setval('truckstop.tb_log_id_seq', 2, true);
+
+
+--
+-- TOC entry 3519 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: tb_place_ID_place_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
@@ -797,8 +897,8 @@ SELECT pg_catalog.setval('truckstop."tb_place_ID_place_seq"', 10, true);
 
 
 --
--- TOC entry 3505 (class 0 OID 0)
--- Dependencies: 230
+-- TOC entry 3520 (class 0 OID 0)
+-- Dependencies: 232
 -- Name: tb_role_ID_role_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
@@ -806,8 +906,8 @@ SELECT pg_catalog.setval('truckstop."tb_role_ID_role_seq"', 10, true);
 
 
 --
--- TOC entry 3506 (class 0 OID 0)
--- Dependencies: 232
+-- TOC entry 3521 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: tb_type_ID_type_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
@@ -815,16 +915,16 @@ SELECT pg_catalog.setval('truckstop."tb_type_ID_type_seq"', 20, true);
 
 
 --
--- TOC entry 3507 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3522 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: tb_user_ID_user_seq; Type: SEQUENCE SET; Schema: truckstop; Owner: docker
 --
 
-SELECT pg_catalog.setval('truckstop."tb_user_ID_user_seq"', 100, true);
+SELECT pg_catalog.setval('truckstop."tb_user_ID_user_seq"', 120, true);
 
 
 --
--- TOC entry 3284 (class 2606 OID 16390)
+-- TOC entry 3292 (class 2606 OID 16460)
 -- Name: rel_place_additional rel_place_additional_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -833,7 +933,7 @@ ALTER TABLE ONLY truckstop.rel_place_additional
 
 
 --
--- TOC entry 3286 (class 2606 OID 16395)
+-- TOC entry 3294 (class 2606 OID 16462)
 -- Name: rel_place_type rel_place_type_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -842,7 +942,7 @@ ALTER TABLE ONLY truckstop.rel_place_type
 
 
 --
--- TOC entry 3288 (class 2606 OID 16400)
+-- TOC entry 3296 (class 2606 OID 16464)
 -- Name: rel_user_role rel_user_role_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -851,7 +951,7 @@ ALTER TABLE ONLY truckstop.rel_user_role
 
 
 --
--- TOC entry 3291 (class 2606 OID 16406)
+-- TOC entry 3299 (class 2606 OID 16466)
 -- Name: tb_additional tb_additional_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -860,7 +960,7 @@ ALTER TABLE ONLY truckstop.tb_additional
 
 
 --
--- TOC entry 3294 (class 2606 OID 16417)
+-- TOC entry 3302 (class 2606 OID 16468)
 -- Name: tb_comment tb_comment_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -869,7 +969,7 @@ ALTER TABLE ONLY truckstop.tb_comment
 
 
 --
--- TOC entry 3297 (class 2606 OID 16424)
+-- TOC entry 3305 (class 2606 OID 16470)
 -- Name: tb_company tb_company_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -878,7 +978,16 @@ ALTER TABLE ONLY truckstop.tb_company
 
 
 --
--- TOC entry 3301 (class 2606 OID 16432)
+-- TOC entry 3326 (class 2606 OID 16566)
+-- Name: tb_log tb_log_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
+--
+
+ALTER TABLE ONLY truckstop.tb_log
+    ADD CONSTRAINT tb_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3309 (class 2606 OID 16472)
 -- Name: tb_login tb_login_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -887,7 +996,7 @@ ALTER TABLE ONLY truckstop.tb_login
 
 
 --
--- TOC entry 3316 (class 2606 OID 16550)
+-- TOC entry 3311 (class 2606 OID 16474)
 -- Name: tb_nationality tb_nationality_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -896,7 +1005,7 @@ ALTER TABLE ONLY truckstop.tb_nationality
 
 
 --
--- TOC entry 3304 (class 2606 OID 16442)
+-- TOC entry 3314 (class 2606 OID 16476)
 -- Name: tb_place tb_place_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -905,7 +1014,7 @@ ALTER TABLE ONLY truckstop.tb_place
 
 
 --
--- TOC entry 3307 (class 2606 OID 16449)
+-- TOC entry 3317 (class 2606 OID 16478)
 -- Name: tb_role tb_role_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -914,7 +1023,7 @@ ALTER TABLE ONLY truckstop.tb_role
 
 
 --
--- TOC entry 3310 (class 2606 OID 16456)
+-- TOC entry 3320 (class 2606 OID 16480)
 -- Name: tb_type tb_type_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -923,7 +1032,7 @@ ALTER TABLE ONLY truckstop.tb_type
 
 
 --
--- TOC entry 3314 (class 2606 OID 16464)
+-- TOC entry 3324 (class 2606 OID 16482)
 -- Name: tb_user tb_user_pkey; Type: CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -932,7 +1041,7 @@ ALTER TABLE ONLY truckstop.tb_user
 
 
 --
--- TOC entry 3311 (class 1259 OID 24754)
+-- TOC entry 3321 (class 1259 OID 16483)
 -- Name: fki_tb_user_fk_company; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -940,7 +1049,7 @@ CREATE INDEX fki_tb_user_fk_company ON truckstop.tb_user USING btree ("ID_compan
 
 
 --
--- TOC entry 3312 (class 1259 OID 24748)
+-- TOC entry 3322 (class 1259 OID 16484)
 -- Name: fki_tb_user_fk_nationality; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -948,7 +1057,7 @@ CREATE INDEX fki_tb_user_fk_nationality ON truckstop.tb_user USING btree ("ID_na
 
 
 --
--- TOC entry 3289 (class 1259 OID 16407)
+-- TOC entry 3297 (class 1259 OID 16485)
 -- Name: tb_additional__name; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -956,7 +1065,7 @@ CREATE UNIQUE INDEX tb_additional__name ON truckstop.tb_additional USING btree (
 
 
 --
--- TOC entry 3292 (class 1259 OID 16418)
+-- TOC entry 3300 (class 1259 OID 16486)
 -- Name: tb_comment__user_place; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -964,7 +1073,7 @@ CREATE UNIQUE INDEX tb_comment__user_place ON truckstop.tb_comment USING btree (
 
 
 --
--- TOC entry 3295 (class 1259 OID 16425)
+-- TOC entry 3303 (class 1259 OID 16487)
 -- Name: tb_company__name_company; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -972,7 +1081,7 @@ CREATE UNIQUE INDEX tb_company__name_company ON truckstop.tb_company USING btree
 
 
 --
--- TOC entry 3298 (class 1259 OID 16433)
+-- TOC entry 3306 (class 1259 OID 16488)
 -- Name: tb_login__email; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -980,7 +1089,7 @@ CREATE UNIQUE INDEX tb_login__email ON truckstop.tb_login USING btree (email);
 
 
 --
--- TOC entry 3299 (class 1259 OID 16434)
+-- TOC entry 3307 (class 1259 OID 16489)
 -- Name: tb_login__user; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -988,7 +1097,7 @@ CREATE UNIQUE INDEX tb_login__user ON truckstop.tb_login USING btree ("ID_user")
 
 
 --
--- TOC entry 3302 (class 1259 OID 16443)
+-- TOC entry 3312 (class 1259 OID 16490)
 -- Name: tb_place__address; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -996,7 +1105,7 @@ CREATE UNIQUE INDEX tb_place__address ON truckstop.tb_place USING btree (address
 
 
 --
--- TOC entry 3305 (class 1259 OID 16450)
+-- TOC entry 3315 (class 1259 OID 16491)
 -- Name: tb_role__name; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -1004,7 +1113,7 @@ CREATE UNIQUE INDEX tb_role__name ON truckstop.tb_role USING btree (name_role);
 
 
 --
--- TOC entry 3308 (class 1259 OID 16457)
+-- TOC entry 3318 (class 1259 OID 16492)
 -- Name: tb_type__name_type; Type: INDEX; Schema: truckstop; Owner: docker
 --
 
@@ -1012,7 +1121,17 @@ CREATE UNIQUE INDEX tb_type__name_type ON truckstop.tb_type USING btree (name_ty
 
 
 --
--- TOC entry 3317 (class 2606 OID 16470)
+-- TOC entry 3339 (class 2620 OID 16568)
+-- Name: tb_user trg_tb_log; Type: TRIGGER; Schema: truckstop; Owner: docker
+--
+
+CREATE TRIGGER trg_tb_log1 AFTER INSERT OR DELETE OR UPDATE ON truckstop.tb_user FOR EACH ROW EXECUTE FUNCTION truckstop.fcn__log();
+CREATE TRIGGER trg_tb_log2 AFTER INSERT OR DELETE OR UPDATE ON truckstop.tb_place FOR EACH ROW EXECUTE FUNCTION truckstop.fcn__log();
+CREATE TRIGGER trg_tb_log3 AFTER INSERT OR DELETE OR UPDATE ON truckstop.tb_comment FOR EACH ROW EXECUTE FUNCTION truckstop.fcn__log();
+
+
+--
+-- TOC entry 3327 (class 2606 OID 16493)
 -- Name: rel_place_additional rel_place_additional__additional; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1021,7 +1140,7 @@ ALTER TABLE ONLY truckstop.rel_place_additional
 
 
 --
--- TOC entry 3318 (class 2606 OID 16465)
+-- TOC entry 3328 (class 2606 OID 16498)
 -- Name: rel_place_additional rel_place_additional__place; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1030,7 +1149,7 @@ ALTER TABLE ONLY truckstop.rel_place_additional
 
 
 --
--- TOC entry 3319 (class 2606 OID 16475)
+-- TOC entry 3329 (class 2606 OID 16503)
 -- Name: rel_place_type rel_place_type__place; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1039,7 +1158,7 @@ ALTER TABLE ONLY truckstop.rel_place_type
 
 
 --
--- TOC entry 3320 (class 2606 OID 16480)
+-- TOC entry 3330 (class 2606 OID 16508)
 -- Name: rel_place_type rel_place_type__type; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1048,7 +1167,7 @@ ALTER TABLE ONLY truckstop.rel_place_type
 
 
 --
--- TOC entry 3321 (class 2606 OID 16490)
+-- TOC entry 3331 (class 2606 OID 16513)
 -- Name: rel_user_role rel_user_role__role; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1057,7 +1176,7 @@ ALTER TABLE ONLY truckstop.rel_user_role
 
 
 --
--- TOC entry 3322 (class 2606 OID 16485)
+-- TOC entry 3332 (class 2606 OID 16518)
 -- Name: rel_user_role rel_user_role__user; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1066,7 +1185,7 @@ ALTER TABLE ONLY truckstop.rel_user_role
 
 
 --
--- TOC entry 3323 (class 2606 OID 16495)
+-- TOC entry 3333 (class 2606 OID 16523)
 -- Name: tb_comment tb_comment__place; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1075,7 +1194,7 @@ ALTER TABLE ONLY truckstop.tb_comment
 
 
 --
--- TOC entry 3324 (class 2606 OID 16500)
+-- TOC entry 3334 (class 2606 OID 16528)
 -- Name: tb_comment tb_comment__user; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1084,7 +1203,7 @@ ALTER TABLE ONLY truckstop.tb_comment
 
 
 --
--- TOC entry 3325 (class 2606 OID 16505)
+-- TOC entry 3335 (class 2606 OID 16533)
 -- Name: tb_login tb_login__user; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1093,7 +1212,7 @@ ALTER TABLE ONLY truckstop.tb_login
 
 
 --
--- TOC entry 3326 (class 2606 OID 16510)
+-- TOC entry 3336 (class 2606 OID 16538)
 -- Name: tb_place tb_place__company; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1102,7 +1221,7 @@ ALTER TABLE ONLY truckstop.tb_place
 
 
 --
--- TOC entry 3327 (class 2606 OID 24749)
+-- TOC entry 3337 (class 2606 OID 16543)
 -- Name: tb_user tb_user_fk_company; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1111,7 +1230,7 @@ ALTER TABLE ONLY truckstop.tb_user
 
 
 --
--- TOC entry 3328 (class 2606 OID 24743)
+-- TOC entry 3338 (class 2606 OID 16548)
 -- Name: tb_user tb_user_fk_nationality; Type: FK CONSTRAINT; Schema: truckstop; Owner: docker
 --
 
@@ -1119,7 +1238,7 @@ ALTER TABLE ONLY truckstop.tb_user
     ADD CONSTRAINT tb_user_fk_nationality FOREIGN KEY ("ID_nationality") REFERENCES truckstop.tb_nationality("ID_nationality") NOT VALID;
 
 
--- Completed on 2025-04-10 17:19:08 UTC
+-- Completed on 2025-04-10 23:00:48 UTC
 
 --
 -- PostgreSQL database dump complete
