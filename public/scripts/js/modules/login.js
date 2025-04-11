@@ -27,7 +27,8 @@ export async function initSite() {
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
-                ALERT.show("success", "Login successful! You will be redirected to the home page in <span id='alertTime'>5</span> seconds.");
+                ALERT.show("success", "Login successful! You will be redirected to the home page in <span id='alertTime'>3</span> seconds.");
+                let seconds = 3;
 
                 document.getElementById("main").classList.toggle("fade-out-default", "fade-in-default");
                 setTimeout(() => {
@@ -36,10 +37,10 @@ export async function initSite() {
                 
                 setTimeout(() => {
                     window.location.href = "/";
-                }, 5000);
+                }, seconds * 1000);
 
                 const span = document.getElementById("alertTime");
-                let seconds = 5;
+                
                 setInterval(() => {
                     seconds--;
                     span.textContent = seconds;
