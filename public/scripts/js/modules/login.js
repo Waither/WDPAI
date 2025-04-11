@@ -24,35 +24,35 @@ export async function initSite() {
         const formData = new FormData(form);
 
         fetch("/public/scripts/php/login.php", { method: "POST", body: formData })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                let seconds = 3;
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    let seconds = 3;
 
-                ALERT.show("success", `Login successful! You will be redirected to the home page in <span id='alertTime'>${seconds}</span> seconds.`);
+                    ALERT.show("success", `Login successful! You will be redirected to the home page in <span id='alertTime'>${seconds}</span> seconds.`);
 
-                document.getElementById("main").classList.toggle("fade-out-default", "fade-in-default");
-                setTimeout(() => {
-                    document.getElementById("main").remove();
-                }, 500);
-                
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, seconds * 1000);
+                    document.getElementById("main").classList.toggle("fade-out-default", "fade-in-default");
+                    setTimeout(() => {
+                        document.getElementById("main").remove();
+                    }, 500);
+                    
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, seconds * 1000);
 
-                const span = document.getElementById("alertTime");
-                
-                setInterval(() => {
-                    seconds--;
-                    span.textContent = seconds;
-                }, 1000);
-            }
-            else {
-                ALERT.show("error", "Login failed: " + (data.message || "Unknown error"));
-            }
-        })
-        .catch((error) => {
-            ALERT.show("error", "Login failed: " + error);
-        });
+                    const span = document.getElementById("alertTime");
+                    
+                    setInterval(() => {
+                        seconds--;
+                        span.textContent = seconds;
+                    }, 1000);
+                }
+                else {
+                    ALERT.show("error", "Login failed: " + (data.message || "Unknown error"));
+                }
+            })
+            .catch((error) => {
+                ALERT.show("error", "Login failed: " + error);
+            });
     }
 }
