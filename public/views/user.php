@@ -1,4 +1,8 @@
-<?php if (!isset($_COOKIE['user'])) header('Location: /login'); ?>
+<?php
+    if (!isset($_COOKIE['user'])) {
+        header('Location: /login');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <?php require_once 'presets/head.php'; ?>
@@ -15,7 +19,7 @@
             <div id="placeLeft" class="col-12 col-md-4 d-flex flex-column <?= $mobile ? "h-max-content" : ""; ?>">
                 <div class="d-flex flex-column">
                     <div class="d-flex justify-content-center <?= $mobile ? "d-none" : ""; ?>">
-                        <img id="modalImage" class="img-fluid rounded" src="" alt="User Image">
+                        <img id="modalImage" class="img-fluid rounded" src="" alt="User photo">
                     </div>
                     <h4>Name: <span class="fw-normal"><?= $user->name; ?></span></h4>
                     <h4>Company: <span class="fw-normal"><?= $user->company ?? "no company"; ?></span></h4>

@@ -35,10 +35,8 @@
                     continue;
                 }
 
-                if ($link->role != "" && isset($_COOKIE['user'])) {
-                    if (!in_array($link->role, $user->roles)) {
-                        continue;
-                    }
+                if ($link->role != "" && isset($_COOKIE['user']) && !in_array($link->role, $user->roles)) {
+                    continue;
                 }
 
                 if ($mobile && ($link->role != "" || ($link->name == "favourite" && !isset($_COOKIE['user'])) || ($link->name == "user" && !isset($_COOKIE['user'])))) {

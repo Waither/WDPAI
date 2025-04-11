@@ -10,7 +10,6 @@ export async function initSite() {
     map = await MAP.initMap();
 
     setTimeout(async () => {
-        const formData = new FormData();
         const position = JSON.stringify({ lat: 52.210, lng: 20.982 });
 
         fetch(`/public/scripts/php/getClosePins.php?position=${position}`, { method: "GET" })
@@ -30,4 +29,3 @@ export async function initSite() {
             });
     }, 1000);
 }
-

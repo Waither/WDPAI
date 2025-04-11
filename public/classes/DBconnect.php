@@ -1,4 +1,5 @@
 <?php
+
 class DBconnect {
     private $servername;
     private $username;
@@ -34,7 +35,7 @@ class DBconnect {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
-            throw new Exception($e->getMessage());
+            throw new PDOException($e->getMessage());
         }
     }
 
@@ -47,7 +48,7 @@ class DBconnect {
             return true;
         }
         catch (PDOException $e) {
-            throw new Exception($e->getMessage());
+            throw new PDOException($e->getMessage());
         }
     }
 
@@ -63,7 +64,7 @@ class DBconnect {
     }
 }
 
-function query(string $query, array $params = [], string $className = NULL): array|bool|string {
+function query(string $query, array $params = [], string $className = null): array|bool|string {
     $db = new DBconnect();
 
     // Arrays with DML & DQL commands
@@ -78,9 +79,7 @@ function query(string $query, array $params = [], string $className = NULL): arr
         if (in_array($queryType, $dmlCommands)) {
 
             // Execute query
-            $result = $db->executeQuery($query, $params);
-    
-            return $result;
+            return $db->executeQuery($query, $params);
         }
         
         // Check if first query word is DQL CommandX
@@ -129,7 +128,7 @@ function query(string $query, array $params = [], string $className = NULL): arr
             return $data;
         }
         else {
-            throw new Exception($queryType);
+            throw new PDOException($queryType);
         }
     }
     catch (Exception $e) {

@@ -12,6 +12,6 @@ class Application
     public function run(): void
     {
         $page = $this->router->resolve();
-        require __DIR__ . $page;
+        require __DIR__.$page;
     }
 }
