@@ -2,16 +2,34 @@
 
 ## Overview
 
-This project is a **web application** designed for managing places, users, and their interactions. It is built using **PHP**, **PostgreSQL**, and **JavaScript**, with a responsive frontend powered by **SCSS**. The application is containerized using **Docker**, ensuring a consistent development and deployment environment.
+TruckStopInfo is a specialized **web application** designed exclusively for professional truck drivers. The platform serves as a comprehensive tool for exploring, reviewing, and sharing information about key facilities and amenities at various locations, such as truck stops, warehouses, fuel stations, and rest areas. It empowers drivers to make informed decisions about where to stop, refuel, rest, or unload cargo, based on real user feedback and detailed facility information.
+
+Built using **PHP**, **PostgreSQL**, and **JavaScript**, TruckStopInfo features a responsive frontend powered by **SCSS** and is containerized with **Docker** for seamless deployment and development.
 
 ### Key Features
-- **User Authentication**: Registration, login, and role-based access control.
-- **Interactive Map**: Integration with **Google Maps API** to display places dynamically.
-- **Place Management**: Add, edit, and view places with additional features and types.
-- **Comments and Ratings**: Users can leave feedback and rate places.
-- **Moderator Tools**: Manage places and comments
-- **Admin Tools**: Manage users and roles.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Facility Exploration**: Browse detailed information about truck stops, warehouses, fuel stations, and other facilities, including available amenities like parking, showers, restrooms, and Wi-Fi.
+- **User Reviews and Ratings**: Share experiences by leaving reviews and ratings for facilities, helping other drivers make better decisions.
+- **Interactive Map**: Integration with **Google Maps API** to dynamically display facility locations and their details.
+- **Amenity Indicators**: Clearly see which facilities offer specific amenities, such as restrooms, showers, internal parking, or dining options.
+- **Advanced Search and Filtering**: Quickly find facilities based on type, location, or specific features like parking availability, fuel prices, or additional services.
+- **Responsive Design**: Optimized for mobile devices, ensuring usability on the road.
+
+### Use Cases
+TruckStopInfo is tailored to meet the needs of professional truck drivers:
+1. **Finding Facilities**: Locate nearby truck stops, fuel stations, or rest areas with specific amenities like showers or secure parking.
+2. **Reviewing Locations**: Share feedback about facilities, such as cleanliness, service quality, or availability of amenities.
+3. **Planning Stops**: Use the interactive map and search tools to plan efficient routes with convenient stops.
+4. **Community Insights**: Benefit from the collective knowledge of other drivers through reviews and ratings.
+
+### Facility Types
+The platform supports a wide range of facility types, including:
+- **Truck Stops**: Comprehensive facilities offering parking, fuel, and rest areas.
+- **Fuel Stations**: Locations providing fuel and additional services like truck washes or minor repairs.
+- **Warehouses**: Loading and unloading zones with information about internal parking, restrooms, or waiting areas.
+- **Rest Areas**: Comfortable spots for drivers to rest and refresh during long journeys.
+- **Additional Features**: Facilities with amenities like Wi-Fi, showers, restaurants, or secure parking.
+
+TruckStopInfo is a one-stop solution for professional truck drivers to explore,
 
 ---
 
@@ -94,8 +112,8 @@ The database includes the following procedures:
 
 ### Triggers
 - **`tb_user`**: Monitors changes to the `tb_user` table and logs all modifications into the `tb_log` table for auditing purposes.
-- **`tb_place`**: Tracks updates and deletions in the `tb_place` table, ensuring that related entries in `rel_place_type` and `rel_place_additional` are updated or removed accordingly.
-- **`tb_comment`**: Automatically recalculates the average rating for a place in the `tb_place` table whenever a comment is added, updated, or deleted.
+- **`tb_place`**: Monitors changes to the `tb_place` table and logs all modifications into the `tb_log` table for auditing purposes.
+- **`tb_comment`**: Monitors changes to the `tb_comment` table and logs all modifications into the `tb_log` table for auditing purposes.
 
 ---
 
@@ -181,4 +199,4 @@ WDPAI/
 ![Admin](markdown/Admin.png "Admin")
 
 ### Authors
-- Gąsior Maciej 
+- Gąsior Maciej
