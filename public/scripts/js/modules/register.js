@@ -37,8 +37,9 @@ export async function initSite() {
             .then((response) => response.json())
             .then((data) => {
                 if (data.success) {
-                    ALERT.show("success", "Register successful! You will be redirected to the home page in <span id='alertTime'>3</span> seconds.");
                     let seconds = 3;
+
+                    ALERT.show("success", `Register successful! You will be redirected to the home page in <span id='alertTime'>${seconds}</span> seconds.`);
 
                     document.getElementById("main").classList.toggle("fade-out-default", "fade-in-default");
                     setTimeout(() => {
