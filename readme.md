@@ -198,5 +198,7 @@ WDPAI/
 #### Edit user as Admin
 ![Admin](markdown/Admin.png "Admin")
 
+---
+
 ### Authors
 - Gąsior Maciej
