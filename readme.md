@@ -51,6 +51,7 @@ The database consists of the following tables:
 - **`rel_place_type`**: Links places to their types.
 - **`rel_place_additional`**: Links places to additional features.
 - **`tb_login`**: Stores user login credentials.
+- - **`tb_favourite`**: Stores favourite places for users.
 
 ### Views
 The database includes the following views:
@@ -93,6 +94,9 @@ The database includes the following procedures:
   - `ID_additional` → `tb_additional(ID_additional)` (Foreign Key, `CASCADE` on delete).
 - **`tb_login`**:
   - `ID_user` → `tb_user(ID_user)` (Foreign Key, `CASCADE` on delete).
+- **`tb_favourite`**:
+  - `ID_user` → `tb_user(ID_user)` (Foreign Key, `CASCADE` on delete).
+  - `ID_place` → `tb_place(ID_place)` (Foreign Key, `CASCADE` on delete).
 
 ### Constraints
 - Primary keys are defined for all tables.
