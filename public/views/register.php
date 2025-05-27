@@ -1,7 +1,7 @@
 <?php if (isset($_COOKIE['user'])) header('Location: /'); ?>
 <!DOCTYPE html>
 <html lang="pl">
-<?php include 'presets/head.php'; ?>
+<?php require_once 'presets/head.php'; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <div id="main" class="d-flex flex-column justify-content-center">
         <div id="loginForm" class="container d-flex flex-column rounded-5 shadow pt-3 pb-5">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
-<?php include 'presets/head.php'; ?>
+<?php require_once 'presets/head.php'; ?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <?php require_once 'presets/sidebar.php'; ?>
 

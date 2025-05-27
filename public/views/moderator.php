@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="pl">
 <?php require_once 'presets/head.php'; ?>
+<?php
+    if (!isset($user) || (isset($user) && !in_array("moderator", $user->roles))) {
+        echo "<script>window.location.href = '/';</script>";
+        die();
+    }
+    else {
+        echo "<input type='hidden' id='moderatorID' value='{$user->ID_special}'>";
+    }
+?>
 <body <?= $mobile ? "class='flex-column-reverse' data-mobile='1'" : ""; ?>>
     <?php require_once 'presets/sidebar.php'; ?>
 

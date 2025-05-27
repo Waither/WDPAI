@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
-<?php include 'presets/head.php'; ?>
+<?php require_once 'presets/head.php'; ?>
 <?php
     if (!isset($user) || (isset($user) && !in_array("admin", $user->roles))) {
         echo "<script>window.location.href = '/';</script>";
