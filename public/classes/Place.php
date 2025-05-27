@@ -66,7 +66,7 @@ class Place {
     }
 
     public function getRatingStars(): string {
-        $stars = "<div class='cardStars mt-1 tooltip'><span class='tooltiptext'>{$this->rating}</span>";
+        $stars = "<div class='cardStars tooltip'><span class='tooltiptext'>{$this->rating}</span>";
         for ($i = 0; $i < 5; $i++) {
             if ($this->rating >= $i + 1) {
                 $stars .= "<i class='fas fa-star'></i>";

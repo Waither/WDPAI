@@ -170,6 +170,14 @@ $justify-content-map: (
     }
 }
 
+.w-min-none {
+    min-width: none !important;
+}
+
+.w-max-none {
+    max-width: none !important;
+}
+
 .under-construction {
     flex: 1;
 }

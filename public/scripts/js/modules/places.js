@@ -102,4 +102,10 @@ export async function initSite() {
             element.style.display = (matches || value === "") ? "" : "none";
         });
     });
+
+    const btn = document.getElementById('addToFavourite');
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        btn.querySelector('span').textContent = btn.classList.contains('active') ? 'Delete from Favourite' : 'Add to Favourite';
+    });
 }

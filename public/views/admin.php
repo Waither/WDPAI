@@ -28,9 +28,7 @@
                         <section class="scroll-box">
                             <?php
                                 $users = query('SELECT * FROM vw_user;', [], "User");
-                                foreach ($users as $user) {
-                                    include 'presets/user.php';
-                                }
+                                foreach ($users as $user) include 'presets/user.php';
                             ?>
                         </section>
                     </div>
@@ -82,7 +80,7 @@
                                 <div class="col-12">
                                     <section id="commentsDiv" class="scroll-box">
                                         <div class="d-flex justify-content-center">
-                                            <div class="spinner-border" role="status">
+                                            <div class="spinner-border">
                                                 <span class="visually-hidden">Loading...</span>
                                             </div>
                                         </div>

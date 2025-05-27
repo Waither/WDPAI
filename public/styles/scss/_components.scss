@@ -1046,3 +1046,46 @@
 body:not([data-mobile="1"]) #placeLeft, body:not([data-mobile="1"]) #userLeft {
     border-right: solid $border-width $color-light-border-subtle;
 }
+
+.favorite-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 0.3rem;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+
+    .fa-heart {
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    &:hover {
+        background-color: #c0392b;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    &.active {
+        background-color: #2ecc71;
+
+        &:hover {
+            background-color: #27ae60;
+        }
+
+        .fa-heart {
+            color: #f1c40f;
+        }
+    }
+}
+
+#moderatorPanel {
+    gap: 1rem;
+
+    >#moderatorPanelRight {
+        gap: 1rem;
+    }
+}
