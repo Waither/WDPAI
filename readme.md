@@ -51,7 +51,7 @@ The database consists of the following tables:
 - **`rel_place_type`**: Links places to their types.
 - **`rel_place_additional`**: Links places to additional features.
 - **`tb_login`**: Stores user login credentials.
-- - **`tb_favourite`**: Stores favourite places for users.
+- **`tb_favourite`**: Stores favourite places for users.
 
 ### Views
 The database includes the following views:
