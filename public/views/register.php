@@ -1,4 +1,8 @@
-<?php if (isset($_COOKIE['user'])) header('Location: /'); ?>
+<?php
+    if (isset($_COOKIE['user'])) {
+        header('Location: /');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <?php require_once 'presets/head.php'; ?>

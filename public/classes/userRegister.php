@@ -20,7 +20,7 @@ class UserRegister {
             ])[0];
 
             if ($user->uuid === null) {
-                throw new Exception($user->message);
+                throw new UnexpectedValueException($user->message);
             }
 
             $id = $user->uuid;

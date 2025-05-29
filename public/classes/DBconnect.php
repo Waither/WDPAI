@@ -93,15 +93,15 @@ function query(string $query, array $params = [], string $className = null): arr
                 require_once 'Place.php';
                 $data = array_map(
                     fn($row) => new Place(
-                        $row['ID_place'], 
-                        $row['name_place'], 
+                        $row['ID_place'],
+                        $row['name_place'],
                         $row["types"] ?? "",
                         $row["placetags"] ?? "",
-                        $row["name_company"], 
-                        $row["address_place"], 
-                        $row['latitude_place'], 
-                        $row['longitude_place'], 
-                        $row['fcn__avg_rating'], 
+                        $row["name_company"],
+                        $row["address_place"],
+                        $row['latitude_place'],
+                        $row['longitude_place'],
+                        $row['fcn__avg_rating'],
                         $row['image_place'] !== null ? 'data:image/jpeg;base64,'.base64_encode(stream_get_contents($row['image_place'])) : ""
                     ),
                     $data);

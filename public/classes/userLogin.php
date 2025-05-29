@@ -17,7 +17,7 @@ class UserLogin {
             ]);
 
             if (!is_array($user)) {
-                throw new Exception("incorrect email or password");
+                throw new UnexpectedValueException("incorrect email or password");
             }
 
             $user = (object)$user[0];

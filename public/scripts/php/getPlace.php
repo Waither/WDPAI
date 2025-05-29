@@ -7,7 +7,7 @@ try {
     $place = query('SELECT * FROM "vw_place" WHERE "ID_place" = :placeID;', [':placeID' => $placeID], "Place");
 
     if (!is_array($place)) {
-        throw new Exception($place);
+        throw new UnexpectedValueException($place);
     }
 
     $place = (object)$place[0];

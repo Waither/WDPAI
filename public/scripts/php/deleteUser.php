@@ -6,7 +6,7 @@ try {
     $user = query('DELETE FROM "tb_user" WHERE "ID_user" = :user', $_POST);
 
     if (is_string($user)) {
-        throw new Exception($user);
+        throw new UnexpectedValueException($user);
     }
     
     echo json_encode([

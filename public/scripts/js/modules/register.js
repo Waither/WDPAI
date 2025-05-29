@@ -15,7 +15,6 @@ export async function initSite() {
             if (element.value === "") {
                 ALERT.show("warning", "Please fill in all fields");
                 end = true;
-                return;
             }
         });
 

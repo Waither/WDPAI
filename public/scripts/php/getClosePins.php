@@ -8,7 +8,7 @@ try {
     $pins = query('SELECT "ID_place", "name_place", "longitude_place", "latitude_place" FROM tb_place;', [],"Pin");
 
     if (!is_array($pins)) {
-        throw new Exception($pins);
+        throw new UnexpectedValueException($pins);
     }
 
     foreach ($pins as &$pin) {

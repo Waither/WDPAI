@@ -33,3 +33,7 @@ export function hideModal(name = "modalForm") {
         modal.style.display = "none";
     }, 500);
 }
+
+export function log() {
+    console.log("This is a log message from functions.js");
+}

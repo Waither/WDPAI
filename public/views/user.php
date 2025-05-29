@@ -19,7 +19,7 @@
             <div id="placeLeft" class="col-12 col-md-4 d-flex flex-column <?= $mobile ? "h-max-content" : ""; ?>">
                 <div class="d-flex flex-column">
                     <div class="d-flex justify-content-center <?= $mobile ? "d-none" : ""; ?>">
-                        <img id="modalImage" class="img-fluid rounded" src="" alt="User photo">
+                        <img id="modalImage" class="img-fluid rounded" src="" alt="User">
                     </div>
                     <h4>Name: <span class="fw-normal"><?= $user->name; ?></span></h4>
                     <h4>Company: <span class="fw-normal"><?= $user->company ?? "no company"; ?></span></h4>

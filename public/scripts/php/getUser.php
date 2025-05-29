@@ -7,7 +7,7 @@ try {
     $user = query('SELECT * FROM vw_user WHERE "ID_special" = :userID;', [':userID' => $userID], "User");
 
     if (!is_array($user)) {
-        throw new Exception($user);
+        throw new UnexpectedValueException($user);
     }
     
     echo json_encode([

@@ -4,8 +4,8 @@ import * as ALERT from "./alert.js";
 import * as functions from "./functions.js";
 
 export async function initSite() {
-    let ID_user = undefined;
-    let ID_special = undefined;
+    let ID_user;
+    let ID_special;
 
     const container = document.querySelector(".container");
 

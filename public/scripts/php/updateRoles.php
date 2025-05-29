@@ -6,7 +6,7 @@ try {
     $result = query('CALL truckstop."prc__updateUserRoles"(:user, :ids);', $_POST);
 
     if (is_string($result)) {
-        throw new Exception($result);
+        throw new UnexpectedValueException($result);
     }
 
     if (empty($result)) {

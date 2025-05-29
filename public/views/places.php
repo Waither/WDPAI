@@ -19,7 +19,9 @@
                         <section class="scroll-box">
                             <?php
                                 $places = query('SELECT * FROM "vw_place";', [], "Place");
-                                foreach ($places as $place) include 'presets/place.php';
+                                foreach ($places as $place) {
+                                    include 'presets/place.php';
+                                }
                             ?>
                         </section>
                     </div>

@@ -1,4 +1,8 @@
-<?php if (!isset($_COOKIE['user'])) header('Location: /login'); ?>
+<?php
+    if (!isset($_COOKIE['user'])) {
+        header('Location: /login');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <?php require_once 'presets/head.php'; ?>
@@ -20,7 +24,9 @@
                             <?php
                                 $places = query('SELECT * FROM "vw_place" NATURAL JOIN "tb_favourite" NATURAL JOIN "tb_user" WHERE "tb_user"."ID_special" = :id;', [":id" => $_COOKIE['user']], "Place");
                                 $activeFavourite = true;
-                                foreach ($places as $place) include 'presets/place.php';
+                                foreach ($places as $place) {
+                                    include 'presets/place.php';
+                                }
                             ?>
                         </section>
                     </div>

@@ -28,7 +28,9 @@
                         <section class="scroll-box">
                             <?php
                                 $users = query('SELECT * FROM vw_user;', [], "User");
-                                foreach ($users as $user) include 'presets/user.php';
+                                foreach ($users as $user) {
+                                    include 'presets/user.php';
+                                }
                             ?>
                         </section>
                     </div>
